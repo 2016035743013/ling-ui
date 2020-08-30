@@ -1,6 +1,7 @@
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
 import React from 'react';
+import './index.css';
 import PropTypes from 'prop-types';
 
 var Button = /*#__PURE__*/function (_React$Component) {
@@ -14,7 +15,9 @@ var Button = /*#__PURE__*/function (_React$Component) {
 
   _proto.render = function render() {
     var text = this.props.text;
-    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("button", null, text));
+    return /*#__PURE__*/React.createElement("div", {
+      className: "div"
+    }, /*#__PURE__*/React.createElement("button", null, text));
   };
 
   return Button;

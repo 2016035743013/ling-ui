@@ -1,7 +1,7 @@
 
 // 组件库参考文章  https://juejin.im/post/6844903749912100871#heading-6
 import React from 'react';
-import {Button} from './components/index'
+import {Button, Icon} from './components/index'
 import './App.css';
 
 class App extends React.Component {
@@ -16,6 +16,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Button text={text} />
+        <Icon />
       </div>
     );
   }
