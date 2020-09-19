@@ -17,6 +17,7 @@ class App extends React.Component {
         <Button  shape='circle' icon={ <i className="iconfont">&#xe608;</i> }></Button>
         <Button type='primary' shape='round' icon={ <i className="iconfont">&#xe608;</i> }> 我是搜索按钮 </Button>
         <Button  shape='round' icon={ <i className="iconfont">&#xe608;</i> } disabled={true}> 我是搜索按钮 </Button>
+        <Button  type='danger' loading={true}> 我是搜索按钮 </Button>
       </div>
     );
   }

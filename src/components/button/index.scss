@@ -1,5 +1,5 @@
 @import '../../style/theme.scss';
-.common {
+.ling-common {
   -webkit-tap-highlight-color: transparent;
   --antd-wave-shadow-color: $primaryColor;
   --scroll-bar: 0;
@@ -30,9 +30,27 @@
   margin-right: 8px;
   margin-bottom: 12px;
   outline: 0;
+  .ling-loading {
+    i {
+      font-size: 14px;
+      color: white;
+      animation: loadingCircle 1s linear infinite;
+      -webkit-animation: loadingCircle 1s linear infinite;
+      display: inline-block;
+    }
+    @keyframes loadingCircle
+    {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  }
 }
-.default {
-  @extend .common;
+.ling-default {
+  @extend .ling-common;
   color: rgba(0,0,0,.85);
   background: #fff;
   &:hover {
@@ -40,8 +58,8 @@
     border-color: $primaryColor;;
   }
 }
-.primary {
-  @extend .common;
+.ling-primary {
+  @extend .ling-common;
   color: #fff;
   background: $primaryColor;
   border-color: $primaryColor;
@@ -51,8 +69,17 @@
     filter: brightness(1.1);
   }
 }
-.ghost {
-  @extend .common;
+.ling-danger {
+  @extend .ling-common;
+  color: #fff;
+  background: $dangerColor;
+  border-color: $dangerColor;
+  &:hover {
+    filter: brightness(1.1);
+  }
+}
+.ling-ghost {
+  @extend .ling-common;
   color: rgba(0,0,0,.85);
   background: #fff;
   border-color: #d9d9d9;
@@ -62,8 +89,8 @@
     border-color: $primaryColor;;
   }
 }
-.text {
-  @extend .common;
+.ling-text {
+  @extend .ling-common;
   border-color: transparent;
   box-shadow: none;
   margin-right: 8px;
@@ -72,15 +99,15 @@
     background: #F2F6FC;
   }
 }
-.link {
-  @extend .common;
+.ling-link {
+  @extend .ling-common;
   color: #1890ff;
   background: 0 0;
   border-color: transparent;
   box-shadow: none;
 }
 
-.circle {
+.ling-circle {
   width: 32px;
   height: 32px;
   padding: 2.4px 0;
@@ -91,7 +118,7 @@
   padding-left: 0;
   border-radius: 50%;
 }
-.round {
+.ling-round {
   height: 40px;
   padding: 6.4px 20px;
   font-size: 16px;
@@ -101,7 +128,8 @@
   margin-bottom: 12px;
 }
 
-.disabled {
+.ling-disabled {
+  @extend .ling-common;
   cursor: not-allowed;
   color: rgba(0,0,0,.25);
   background: #f5f5f5;
