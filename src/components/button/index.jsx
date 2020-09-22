@@ -21,10 +21,10 @@ class Button extends React.Component {
     onClick: PropTypes.func
   }
   handleClick = (e) => {
-    this.props.onClick(e)
+    this.props.onClick && this.props.onClick(e)
   }
   setBtnClass = () => {
-    const { type, shape, disabled, size, ghost } = this.props 
+    const { type, shape, disabled, size, ghost } = this.props
     let buttonType = prefix
     switch (type) {
       case 'primary': buttonType += 'primary'; break;
@@ -32,18 +32,27 @@ class Button extends React.Component {
       case 'danger': buttonType += 'danger'; break;
       case 'link': buttonType += 'link'; break;
       case 'text': buttonType += 'text'; break;
-      default:  buttonType += 'default'; break;
+      default: buttonType += 'default'; break;
     }
-    return [ disabled ? '' : buttonType, shape ? prefix + shape : '', disabled ? 'ling-disabled' : '', size ? prefix + size : '', ghost ? 'ling-ghost' : ''].join(' ').trim()
+    return [disabled ? '' : buttonType, shape ? prefix + shape : '', disabled ? 'ling-disabled' : '', size ? prefix + size : '', ghost ? 'ling-ghost' : ''].join(' ').trim()
   }
   render () {
-    const { children,icon, loading } = this.props 
+    const { children, icon, loading, target } = this.props
     return (
+      target 
+      ?
+      <a href={target} className={this.setBtnClass()} onClick={this.handleClick}>
+        {
+          loading ? <span className='ling-loading'> <i className='iconfont'>&#xe6cd;</i> </span> : ''
+        }
+        {icon}{children}
+      </a> 
+      : 
       <div className={this.setBtnClass()} onClick={this.handleClick}>
         {
           loading ? <span className='ling-loading'> <i className='iconfont'>&#xe6cd;</i> </span> : ''
         }
-        { icon }{ children }
+        {icon}{children}
       </div>
     )
   }
