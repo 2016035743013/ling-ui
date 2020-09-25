@@ -4,8 +4,13 @@ import { RadioContext } from './context'
 import Son from './son'
 import "./index.scss"
 
-const MyContext = React.createContext('test')
 class Radio extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      color: 'red'
+    }
+  }
   static propTypes = {
     autoFocus: PropTypes.bool,
     checked: PropTypes.bool,
@@ -13,10 +18,19 @@ class Radio extends React.Component {
     disabled: PropTypes.bool,
     value: PropTypes.any
   }
+  changeColor = () => {
+    this.setState((state) => {
+      return {
+        color: 'blue'
+      }
+    }, () => {
+      console.log('changecolor', this.state)
+    })
+  }
   render () {
     const { children, disabled, autoFocus, defaultChecked, value } = this.props
     return (
-      <MyContext.Provider value={{test: 'test'}}>
+      <RadioContext.Provider value={{...this.state, changeColor: this.changeColor}}>
         <label className="ling-radio-wrapper">
           <span className="ling-radio">
             <input type="radio" className="ling-radio-input" value="" />
@@ -26,7 +40,7 @@ class Radio extends React.Component {
           <span className={['ling-radio-text', 'ling-radio-text-disabled'].join(' ')} >{value}{children}</span>
         </label>
         <Son />
-      </MyContext.Provider>
+      </RadioContext.Provider>
     )
   }
 }

@@ -1,13 +1,18 @@
 import React from 'react'
 import { RadioContext } from './context'
 class Son extends React.Component {
+  constructor(props, context) {
+    super(props)
+    console.log('==========', props)
+    console.log('==========', context)
+  }
   render () {
     return (
       <RadioContext.Consumer>
-        {({theme, toggle}) => {
+        {({color, changeColor}) => {
           return (
-            <div>
-              {theme}
+            <div onClick={changeColor}>
+              {color}
             </div>
           )
         }}

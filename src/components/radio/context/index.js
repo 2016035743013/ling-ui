@@ -1,9 +1,6 @@
 import { createContext } from 'react'
 
-const RadioContext  = createContext({
-  theme: 'test',
-  toggle: () =>{}
-})
+const RadioContext  = createContext()
 
 export {
   RadioContext
