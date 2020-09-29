@@ -31,15 +31,21 @@ class Radio extends React.Component {
     const { children, disabled, autoFocus, defaultChecked, value } = this.props
     return (
       <RadioContext.Provider value={{...this.state, changeColor: this.changeColor}}>
-        <label className="ling-radio-wrapper">
+        {/* <label className="ling-radio-wrapper">
           <span className="ling-radio">
-            <input type="radio" className="ling-radio-input" value="" />
+            <input type="radio"  className="ling-radio-input" value="" />
             <span className={['ling-radio-inner', 'ling-radio-inner-disabled'].join(' ')}></span>
             <span className={['ling-radio-border', 'ling-radio-border-disabled'].join(' ')}></span>
           </span>
           <span className={['ling-radio-text', 'ling-radio-text-disabled'].join(' ')} >{value}{children}</span>
         </label>
-        <Son />
+        <Son /> */} 
+        <label className="ling-radio-wrapper">
+          {/* disabled checked */}
+          <input type="radio" className='ling-radio' disabled={disabled} checked={defaultChecked} />
+          <span className='ling-radio-btn'></span>
+          <span className='ling-radio-text'>{children}</span>
+        </label>
       </RadioContext.Provider>
     )
   }
