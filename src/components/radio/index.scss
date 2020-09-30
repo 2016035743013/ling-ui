@@ -49,6 +49,9 @@
           background: #ccc;
         }
       }
+      & ~ .ling-radio-text {
+        cursor: not-allowed;
+      }
     }
   }
   .ling-radio-text {
