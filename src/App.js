@@ -2,7 +2,7 @@
 // 组件库参考文章  https://juejin.im/post/6844903749912100871#heading-6
 
 import React from 'react';
-import { Radio, RadioGroup } from './components/index'
+import { Radio, RadioGroup, Input } from './components/index'
 import './App.scss'
 class App extends React.Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class App extends React.Component {
           <Radio value='1'>女性</Radio>
         </RadioGroup>
         <Radio style={{display: 'block'}} value='1' checked={true} disabled={true}>女性</Radio>
-
+        <Input />
       </div>
     );
   }
