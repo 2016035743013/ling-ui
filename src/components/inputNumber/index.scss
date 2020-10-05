@@ -1,13 +1,9 @@
 @import '../../style/theme.scss';
-.ling-input-wrapper {
+.ling-inputnumber-wrapper {
   padding: 6.5px 11px;
   display: inline-block;
   color: #262626;
   position: relative;
-  .ling-input-prefix {
-    vertical-align: middle;
-    margin-right: 5px;
-  }
   .ling-input-wrapper-mark {
     position: absolute;
     top: 0px;
@@ -29,6 +25,7 @@
   .ling-input {
     outline: none;
     border: 0;
+    width: 90px;
     &::placeholder {
       color: rgb(191 ,191, 191);
       text-overflow: ellipsis;
@@ -38,6 +35,9 @@
         border-color: $primaryColor;
         box-shadow: 0px 0px 3px $primaryColor;
       }
+      & ~ .ling-number-control {
+        opacity: 1;
+      }
     }
     &:disabled {
       & ~ .ling-input-wrapper-mark {
@@ -46,15 +46,46 @@
         z-index: 1;
         background: #88888829;
       }
+     }
+  }
+  &:hover {
+    .ling-number-control {
+      opacity: 1;
     }
   }
-  .icon-clear {
-    color: #ccc;
-    &:hover {
-      color: #555;
+  .ling-number-control {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    display: inline-flex;
+    margin-left: 8px;
+    flex-direction: column;
+    opacity: 0;
+    transition: all .5s;
+    span {
+      display: inline-block;
+      height: 17px;
+      border-left: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      i {
+        font-size: 12px;
+      }
+      &:hover {
+        i {
+          color: $primaryColor;
+        }
+      }
     }
-  }
-  .ling-input-suffix {
-    vertical-align: middle;
+    span:last-child {
+      border-bottom: 0px;
+    }
+    .ling-control-disabled {
+      cursor: not-allowed;
+      i {
+        cursor: not-allowed;
+      }
+    }
   }
 }

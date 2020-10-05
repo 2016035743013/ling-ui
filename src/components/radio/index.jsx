@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { RadioContext } from './context'
 import "./index.scss"
 
-class Radio extends React.Component {
+class Radio extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
@@ -14,15 +14,6 @@ class Radio extends React.Component {
     checked: PropTypes.bool,
     disabled: PropTypes.bool,
     value: PropTypes.any
-  }
-  changeColor = () => {
-    this.setState((state) => {
-      return {
-        color: 'blue'
-      }
-    }, () => {
-      console.log('changecolor', this.state)
-    })
   }
   render () {
     const { children, disabled, value, checked } = this.props
