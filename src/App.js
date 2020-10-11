@@ -2,7 +2,7 @@
 // 组件库参考文章  https://juejin.im/post/6844903749912100871#heading-6
 
 import React from 'react';
-import { Radio, RadioGroup, Input, Icon, InputNumber,Checkbox, Message } from './components/index'
+import {Button, Radio, RadioGroup, Input, Icon, InputNumber,Checkbox, Message, Tooltip, Alert } from './components/index'
 import './App.scss'
 class App extends React.Component {
   constructor(props) {
@@ -35,8 +35,8 @@ class App extends React.Component {
   render () {
     const { value, isSelect, inputValue } = this.state
     return (
-      <div className="App" onClick={this.showMessage} style={{cursor: 'pointer'}}>
-        test
+      <div className="App">
+        <Alert title="这是警告"/>
       </div>
     );
   }

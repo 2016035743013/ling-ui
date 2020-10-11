@@ -15,7 +15,8 @@ export default class Icon extends React.Component {
         warning: 'icon-warning',
         success: 'icon-success',
         error: 'icon-error_3',
-        info: 'icon-info'
+        info: 'icon-info',
+        close: 'icon-close'
       }
     }
   }
