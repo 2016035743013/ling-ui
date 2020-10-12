@@ -1,0 +1,35 @@
+@import '../../style/theme.scss';
+.ling-slider-wrapper {
+  margin: 16px 0px;
+  height: 4px;
+  border-radius: 3px;
+  background: #e4e8f1;
+  position: relative;
+  user-select: none;
+  .ling-slider-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: absolute;
+    top: -4.5px;
+    left: -6px;
+    background: $primaryColor;
+    cursor: grab;
+    transition: transform .5s;
+    &:hover {
+      transform: scale(1.5);
+    }
+    &:active {
+      cursor: grabbing;
+    }
+  }
+  .ling-slider-bar {
+    width: 10px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background: $primaryColor;
+    height: 100%;
+    border-radius: 3px;
+  }
+}
