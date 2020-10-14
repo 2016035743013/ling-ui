@@ -6,30 +6,34 @@ export default class Slider extends React.Component {
     super(props)
     this.state = {
       left: 0,
-      isMove: false
+      isMove: false,
+      stops: []
     }
     this.container = React.createRef()
+  }
+  componentDidMount() {
+    this.createStops()
   }
   handleMouseDown = (e) => {
     e.persist()
     let containerWidth = this.container.current.offsetWidth
-    const { step, disabled } = this.props
+    const { step, disabled, max, min } = this.props
     if (disabled) {
       return
     }
     let handlemousemove = (e) => {
       let left = e.clientX - this.container.current.offsetLeft
-      console.log(e.clientX || e.pageX, this.container.current.offsetLeft, left)
+      let moveStep = step / ( max - min ) * containerWidth
+      if (this.state.left > left) {
+        left = this.state.left - Math.floor( (this.state.left - left) / moveStep ) * moveStep
+      } else if (this.state.left < left) {
+        left = this.state.left + Math.floor( (left - this.state.left) / moveStep ) * moveStep
+      }
+
       if (left <= -6) {
         left = -6
       } else if (left >= containerWidth - 6) {
         left = containerWidth - 6
-      }
-      if (this.state.left > left) {
-        console.log('向左')
-        left = this.state.left - Math.floor( (this.state.left - left) / step ) * step
-      } else if (this.state.left < left) {
-        left = Math.floor( (left - this.state.left) / step ) * step + this.state.left
       }
       this.setState({
         left,
@@ -44,15 +48,38 @@ export default class Slider extends React.Component {
       })
     })
   }
+  createStops = () => {
+    const { max, min, step } = this.props
+    let containerWidth = this.container.current.offsetWidth
+    let stopCount = (max - min) / step
+    let moveStep = step / ( max - min ) * containerWidth
+    let stops = []
+    console.log(stopCount)
+    for(let i = 1 ; i <= stopCount - 1; i++) {
+      stops.push({
+        left: i * moveStep
+      })
+    }
+    this.setState({
+      stops
+    })
+  }
   render () {
-    const { left, isMove } = this.state
+    const { left, isMove, stops } = this.state
     const { min, max, step, disabled } = this.props
     return (
       <div className='ling-slider-wrapper' ref={this.container}>
         <div className='ling-slider-dot' style={isMove && !disabled ? { left: left + 'px', transform: 'scale(1.5)' } : { left: left + 'px' }} onMouseDown={(e) => { this.handleMouseDown(e) }}></div>
         <div className='ling-slider-bar' style={{ width: left + 6 + 'px' }}></div>
         {
-          Math.floor((max - min) / 200 * left + 6)
+          Math.floor((max - min) / 200 * (left + 6))
+        }
+        {
+          stops.map((item) => {
+            return (
+              <div className="ling-slider-stop" style={item}></div>
+            )
+          })
         }
       </div>
     )
@@ -69,6 +96,6 @@ Slider.propTypes = {
 Slider.defaultProps = {
   min: 0,
   max: 500,
-  step: 10,
+  step: 22,
   disabled: false
 }

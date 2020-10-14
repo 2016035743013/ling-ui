@@ -32,4 +32,14 @@
     height: 100%;
     border-radius: 3px;
   }
+  .ling-slider-stop {
+    position: absolute;
+    left: 100px;
+    top: 0px;
+    background: #bfcbd9;
+    height: 4px;
+    width: 4px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
 }
