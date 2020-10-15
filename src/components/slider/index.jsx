@@ -6,6 +6,7 @@ export default class Slider extends React.Component {
     super(props)
     this.state = {
       left: 0,
+      dotLeft: 0,
       isMove: false,
       stops: []
     }
@@ -25,9 +26,9 @@ export default class Slider extends React.Component {
       let left = e.clientX - this.container.current.offsetLeft
       let moveStep = step / ( max - min ) * containerWidth
       if (this.state.left > left) {
-        left = this.state.left - Math.floor( (this.state.left - left) / moveStep ) * moveStep
+        left = this.state.left - Math.floor( (this.state.left - left ) / moveStep ) * moveStep
       } else if (this.state.left < left) {
-        left = this.state.left + Math.floor( (left - this.state.left) / moveStep ) * moveStep
+        left = this.state.left + Math.floor( (left - this.state.left ) / moveStep ) * moveStep
       }
 
       if (left <= -6) {
@@ -37,6 +38,7 @@ export default class Slider extends React.Component {
       }
       this.setState({
         left,
+        dotLeft: left + ( this.state.left > left ? 4 : -4),
         isMove: true
       })
     }
@@ -65,19 +67,19 @@ export default class Slider extends React.Component {
     })
   }
   render () {
-    const { left, isMove, stops } = this.state
+    const { left, isMove, stops, dotLeft } = this.state
     const { min, max, step, disabled } = this.props
     return (
       <div className='ling-slider-wrapper' ref={this.container}>
-        <div className='ling-slider-dot' style={isMove && !disabled ? { left: left + 'px', transform: 'scale(1.5)' } : { left: left + 'px' }} onMouseDown={(e) => { this.handleMouseDown(e) }}></div>
+        <div className='ling-slider-dot' style={isMove && !disabled ? { left: dotLeft+ 'px', transform: 'scale(1.5)' } : { left: dotLeft + 'px' }} onMouseDown={(e) => { this.handleMouseDown(e) }}></div>
         <div className='ling-slider-bar' style={{ width: left + 6 + 'px' }}></div>
         {
-          Math.floor((max - min) / 200 * (left + 6))
+          Math.floor((max - min) / 200 * (left))
         }
         {
-          stops.map((item) => {
+          stops.map((item, index) => {
             return (
-              <div className="ling-slider-stop" style={item}></div>
+              <div className="ling-slider-stop" style={item} key={index}></div>
             )
           })
         }
@@ -96,6 +98,6 @@ Slider.propTypes = {
 Slider.defaultProps = {
   min: 0,
   max: 500,
-  step: 22,
+  step: 50,
   disabled: false
 }
