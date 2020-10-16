@@ -6,7 +6,7 @@ import {Button, Radio, RadioGroup, Input, Icon, InputNumber,Checkbox, Message, T
 import './App.scss'
 class App extends React.Component {
   constructor(props) {
-    super(props) 
+    super(props)
     this.state = {
       value: '0',
       isSelect: false,
@@ -21,9 +21,7 @@ class App extends React.Component {
     })
   }
   onChange = (value) => {
-    this.setState({
-      inputValue: value
-    })
+    console.log(value)
   }
   showMessage = () => {
     Message.info({
@@ -32,7 +30,7 @@ class App extends React.Component {
       type: 'info'
     })
   }
-  render () {
+  render() {
     const { value, isSelect, inputValue } = this.state
     return (
       <div className="App">
