@@ -16,8 +16,9 @@ export default class Pagination extends React.Component {
   componentDidMount () {
     this.setState({
       current: this.props.defaultCurrent
+    }, () => {
+      this.initPageItems()
     })
-    this.initPageItems()
   }
   turnLeft = () => {
     const { current } = this.state
@@ -56,7 +57,17 @@ export default class Pagination extends React.Component {
       this.initPageItems()
     })
   }
-
+  // 翻5页
+  trun5Page = (num) => {
+    const { current, pages } = this.state
+    let currentPage = current + num
+    if (currentPage <= 1) {
+      currentPage = 1
+    } else if (currentPage >= pages) {
+      currentPage = pages
+    }
+    this.turnToPage(currentPage)
+  }
   initPageItems = () => {
     const { pages, current } = this.state
     const { total, pageSize } = this.props
@@ -74,8 +85,8 @@ export default class Pagination extends React.Component {
     } else {
       if (current <= 3) {
         middleCounts = [2, 3, 4, 5]
-      } else if (current >= pages - 3) {
-        middleCounts = [pages - 4, pages - 3, pages - 2, pages - 1]
+      } else if (current >= itemCount - 3) {
+        middleCounts = [itemCount - 4, itemCount - 3, itemCount - 2, itemCount - 1]
       } else {
         middleCounts = [current - 2, current - 1, current, current + 1, current + 2]
       }
@@ -110,7 +121,10 @@ export default class Pagination extends React.Component {
         {
 
           isShowLeft &&
-          <span className={["ling-pagination-more", disabled ? 'link-pagination-more-disabled' : ''].join(' ').trim()}>
+          <span
+            className={["ling-pagination-more", disabled ? 'link-pagination-more-disabled' : ''].join(' ').trim()}
+            onClick={() => { this.trun5Page(-5) }}
+          >
             <Icon class='more' />
             <Icon class="doubleLeft" />
           </span>
@@ -132,7 +146,10 @@ export default class Pagination extends React.Component {
         {
 
           isShowRight &&
-          <span className={["ling-pagination-more", disabled ? 'link-pagination-more-disabled' : ''].join(' ').trim()}>
+          <span
+            className={["ling-pagination-more", disabled ? 'link-pagination-more-disabled' : ''].join(' ').trim()}
+            onClick={() => { this.trun5Page(5) }}
+          >
             <Icon class='more' />
             <Icon class='doubleRight' />
           </span>

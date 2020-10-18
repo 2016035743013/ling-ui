@@ -34,7 +34,7 @@ class App extends React.Component {
     const { value, isSelect, inputValue } = this.state
     return (
       <div className="App">
-        <Pagination pageSize="10" total="80" disabled />
+        <Pagination pageSize="10" total="180" />
       </div>
     );
   }

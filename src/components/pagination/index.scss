@@ -50,8 +50,8 @@
         color: rgba(0,0,0,.25);
       }
     }
-    
-    & ~ .ling-pagination-active {
+
+    &.ling-pagination-active {
       background: #ccc;
       color: white;
       &:hover {
