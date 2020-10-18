@@ -26,13 +26,7 @@ export default class Pagination extends React.Component {
     if (current <= 1 || disabled) {
       return
     }
-    this.setState((state) => {
-      return {
-        current: state.current - 1
-      }
-    }, () => {
-      this.initPageItems()
-    })
+    this.turnToPage(current - 1)
   }
   turnRight = () => {
     const { current, pages } = this.state
@@ -40,13 +34,7 @@ export default class Pagination extends React.Component {
     if (current >= pages || disabled) {
       return
     }
-    this.setState((state) => {
-      return {
-        current: state.current + 1
-      }
-    }, () => {
-      this.initPageItems()
-    })
+    this.turnToPage(current + 1)
   }
   turnToPage = (num) => {
     const { disabled } = this.props
@@ -69,8 +57,8 @@ export default class Pagination extends React.Component {
     this.turnToPage(currentPage)
   }
   initPageItems = () => {
-    const { pages, current } = this.state
-    const { total, pageSize } = this.props
+    const { current } = this.state
+    const { total, pageSize, onChange } = this.props
     let itemCount = Math.ceil(total / pageSize)
     const isShowLeft = current >= 5 && itemCount > 7
     const isShowRight = current <= itemCount - 4 && itemCount > 7
@@ -91,6 +79,7 @@ export default class Pagination extends React.Component {
         middleCounts = [current - 2, current - 1, current, current + 1, current + 2]
       }
     }
+    onChange && onChange(current)
     this.setState({
       middleCounts,
       isShowLeft,
@@ -162,7 +151,10 @@ export default class Pagination extends React.Component {
             {pages}
           </span>
         }
-        <span className={['ling-pagination-right', current >= pages || disabled ? 'link-pagination-disabled' : ''].join(' ').trim()} onClick={this.turnRight}>
+        <span
+          className={['ling-pagination-right', current >= pages || disabled ? 'link-pagination-disabled' : ''].join(' ').trim()}
+          onClick={this.turnRight}
+        >
           <Icon class="right" />
         </span>
       </div>
@@ -176,7 +168,8 @@ Pagination.propTypes = {
   defaultCurrent: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   disabled: PropTypes.bool,
   showQuickJumper: PropTypes.bool,
-  showSizeChanger: PropTypes.bool
+  showSizeChanger: PropTypes.bool,
+  onChange: PropTypes.func
 }
 
 Pagination.defaultProps = {
