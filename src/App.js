@@ -2,7 +2,7 @@
 // 组件库参考文章  https://juejin.im/post/6844903749912100871#heading-6
 
 import React from 'react';
-import {Button, Radio, RadioGroup, Input, Icon, InputNumber,Checkbox, Message, Tooltip, Alert, Slider, Switch, Pagination } from './components/index'
+import { Button, Radio, RadioGroup, Input, Icon, InputNumber, Checkbox, Message, Tooltip, Alert, Slider, Switch, Pagination } from './components/index'
 import './App.scss'
 class App extends React.Component {
   constructor(props) {
@@ -30,11 +30,11 @@ class App extends React.Component {
       type: 'info'
     })
   }
-  render() {
+  render () {
     const { value, isSelect, inputValue } = this.state
     return (
       <div className="App">
-        <Pagination pageSize="10" total="100" />
+        <Pagination pageSize="10" total="80" disabled />
       </div>
     );
   }

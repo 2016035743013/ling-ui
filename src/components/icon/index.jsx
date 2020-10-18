@@ -19,11 +19,13 @@ export default class Icon extends React.Component {
         close: 'icon-close',
         left: 'icon-left_3',
         right: 'icon-552cc1babd9aa',
-        more: 'icon-gengduo'
+        doubleRight: 'icon-youfanyeyouhua',
+        doubleLeft: 'icon-zuofanyezuohua',
+        more: 'icon-gengduo',
       }
     }
   }
-  render() {
+  render () {
     const { typeMap } = this.state
     const { class: type, style } = this.props
     return (

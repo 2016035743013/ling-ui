@@ -1,3 +1,49 @@
 {
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "editor.fontLigatures": null,
+    // vscode默认启用了根据文件类型自动设置tabsize的选项
+    "editor.detectIndentation": false,
+    // #每次保存的时候自动格式化 
+    "editor.formatOnSave": true,
+    // #每次保存的时候将代码按eslint格式进行修复
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    },
+    "eslint.validate": [ //开启对.vue文件中错误的检查
+        "javascript",
+        "javascriptreact",
+        "html",
+        "vue",
+    ],
+    "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+    "vetur.format.defaultFormatter.js": "prettier-eslint",
+    "vetur.format.defaultFormatterOptions": {
+        "prettyhtml": {
+            "printWidth": 130, // No line exceeds 100 characters
+            "wrapAttributes": false,
+            "sortAttributes": true,
+            "singleQuote": false // Prefer double quotes over single quotes
+        },
+        "prettier": {
+            "semi": false,
+            "singleQuote": true,
+        }
+    },
+    "vetur.format.options.tabSize": 4,
+    "eslint.alwaysShowStatus": true,
+    //关闭快速查找
+    "search.followSymlinks": false,
+    //关闭快速预览
+    "editor.minimap.enabled": false,
+    //取消自动更新
+    "update.mode": "none",
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    "explorer.confirmDelete": false,
+    "prettier.tabWidth": 4,
+    //是否在每行末尾添加分号
+    "prettier.semi": false,
+    //如果为 true，将使用单引号而不是双引号
+    "prettier.singleQuote": true
 }
