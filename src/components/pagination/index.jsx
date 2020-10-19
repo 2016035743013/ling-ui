@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Icon from '../icon'
+import { classNames } from '../../common/common'
 import './index.scss'
 export default class Pagination extends React.Component {
   constructor(props) {
@@ -92,8 +93,12 @@ export default class Pagination extends React.Component {
     const { disabled } = this.props
     return (
       <div className='ling-pagination-wrapper'>
+        {/* className={['ling-pagination-left', current <= 1 || disabled ? 'link-pagination-disabled' : ''].join(' ').trim()} */}
         <span
-          className={['ling-pagination-left', current <= 1 || disabled ? 'link-pagination-disabled' : ''].join(' ').trim()}
+          className={classNames({
+            'ling-pagination-left': true,
+            'link-pagination-disabled': current <= 1 || disabled
+          })}
           onClick={this.turnLeft}
         >
           <Icon class="left" />
@@ -105,7 +110,8 @@ export default class Pagination extends React.Component {
             onClick={() => { this.turnToPage(1) }}
           >
             1
-          </span>}
+          </span>
+        }
         {/* 现实左边的分页 */}
         {
 
