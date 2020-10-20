@@ -2,8 +2,9 @@
 // 组件库参考文章  https://juejin.im/post/6844903749912100871#heading-6
 
 import React from 'react';
-import { Button, Radio, RadioGroup, Input, Icon, InputNumber, Checkbox, Message, Tooltip, Alert, Slider, Switch, Pagination } from './components/index'
+import { Select, Message, Tooltip, Alert, Slider, Switch, Pagination } from './components/index'
 import './App.scss'
+const { Option } = Select
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -14,11 +15,7 @@ class App extends React.Component {
     }
   }
   handleChange = (value) => {
-    this.setState(() => {
-      return {
-        value
-      }
-    })
+    console.log(value)
   }
   onChange = (value) => {
     console.log(value)
@@ -34,7 +31,14 @@ class App extends React.Component {
     const { value, isSelect, inputValue } = this.state
     return (
       <div className="App">
-        <Pagination pageSize="10" total="180" />
+        <Select defaultValue="lucy" style={{ width: 120 }} onChange={this.handleChange}>
+          <Option value="jack">Jack</Option>
+          <Option value="lucy">Lucy</Option>
+          <Option value="disabled" disabled>
+            Disabled
+          </Option>
+          <Option value="Yiminghe">yiminghe</Option>
+        </Select>
       </div>
     );
   }

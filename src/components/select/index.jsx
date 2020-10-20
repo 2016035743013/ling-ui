@@ -1,15 +1,8 @@
-import React from 'react'
-import './index.scss'
+import Select from './select'
+import optionGroup from './optionGroup'
+import Option from './option'
 
-export default class Select extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  render () {
-    return (
-      <div className="ling-select-wrapper">
+Select.Option = Option
+Select.optionGroup = optionGroup
 
-      </div>
-    )
-  }
-}
+export default Select
