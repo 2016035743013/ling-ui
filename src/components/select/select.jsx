@@ -1,22 +1,45 @@
 import React from 'react'
 import Icon from '../icon'
+import PropTypes from 'prop-types'
+import { classNames } from '../../common/common'
 import './index.scss'
 
 export default class Select extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      value: ''
+    }
   }
+
+  componentDidMount () {
+    const { defaultValue } = this.props
+    this.setState({
+      value: defaultValue
+    })
+  }
+
   render () {
-    const { defaultValue, style } = this.props
+    const { defaultValue, style, allowClear } = this.props
     return (
       <div className="ling-select-wrapper">
         <div className="ling-select-input" style={style}>
           {/* <input type="text"/> */}
           <div className="ling-select-text">{defaultValue}</div>
-          <Icon class="down" />
+          <span className={classNames({ 'allow-clear': allowClear })}>
+            <Icon class="down" />
+            <Icon class="clear" />
+          </span>
         </div>
-        {this.props.children}
+        <div className='ling-select-options'>
+          {this.props.children}
+        </div>
       </div>
     )
   }
+}
+
+Select.propTypes = {
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.number]),
+  allowClear: PropTypes.bool
 }

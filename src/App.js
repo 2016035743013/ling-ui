@@ -31,7 +31,7 @@ class App extends React.Component {
     const { value, isSelect, inputValue } = this.state
     return (
       <div className="App">
-        <Select defaultValue="lucy" style={{ width: 120 }} onChange={this.handleChange}>
+        <Select defaultValue="lucy" style={{ width: 120 }} onChange={this.handleChange} allowClear>
           <Option value="jack">Jack</Option>
           <Option value="lucy">Lucy</Option>
           <Option value="disabled" disabled>
