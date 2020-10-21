@@ -13,7 +13,7 @@ export default class Select extends React.Component {
         <div className="ling-select-input" style={style}>
           {/* <input type="text"/> */}
           <div className="ling-select-text">{defaultValue}</div>
-          <Icon class=" " />
+          <Icon class="down" />
         </div>
         {this.props.children}
       </div>
