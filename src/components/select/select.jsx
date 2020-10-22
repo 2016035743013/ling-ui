@@ -1,10 +1,11 @@
 import React from 'react'
 import Icon from '../icon'
 import PropTypes from 'prop-types'
+import { ClickOutside } from '../../tools'
 import { classNames } from '../../common/common'
 import './index.scss'
 
-export default class Select extends React.Component {
+class Select extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -43,3 +44,6 @@ Select.propTypes = {
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.number]),
   allowClear: PropTypes.bool
 }
+
+
+export default ClickOutside(Select)
