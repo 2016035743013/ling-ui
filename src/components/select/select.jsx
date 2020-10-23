@@ -19,13 +19,16 @@ class Select extends React.Component {
       value: defaultValue
     })
   }
-
+  // 点击select之外触发的事件
+  handleClickOutside = () => {
+    console.log('触发点击')
+  }
   render () {
     const { defaultValue, style, allowClear } = this.props
     return (
       <div className="ling-select-wrapper">
         <div className="ling-select-input" style={style}>
-          {/* <input type="text"/> */}
+          {/* <input type="text" value={defaultValue}/> */}
           <div className="ling-select-text">{defaultValue}</div>
           <span className={classNames({ 'allow-clear': allowClear })}>
             <Icon class="down" />

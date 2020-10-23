@@ -13,11 +13,9 @@ function ClickOutside (Component) {
     }
 
     componentDidMount () {
-
-      console.log(this.props)
       window.addEventListener('click', (e) => {
         if (this.componentRef && !this.componentRef.contains(e.target)) {
-          console.log('You clicked outside of me!');
+          new Component().handleClickOutside()
         }
       })
     }
