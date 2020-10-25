@@ -6,16 +6,18 @@ function ClickOutside (Component) {
   class ClickOutside extends React.Component {
     constructor(props) {
       super(props)
-      // this.componentRef = React.createRef()
     }
     setWrapperRef = (node) => {
       this.componentRef = node;
     }
-
+    getChildComponent = (node) => {
+      this.wrapComponent = node
+    }
     componentDidMount () {
       window.addEventListener('click', (e) => {
         if (this.componentRef && !this.componentRef.contains(e.target)) {
-          new Component().handleClickOutside()
+          // console.log(this.wrapComponent)
+          this.wrapComponent.handleClickOutside()
         }
       })
     }
@@ -25,7 +27,7 @@ function ClickOutside (Component) {
     render () {
       return (
         <div className="outside-wrapper" ref={this.setWrapperRef}>
-          <Component {...this.props} />
+          <Component {...this.props} ref={this.getChildComponent} />
         </div>
       )
     }

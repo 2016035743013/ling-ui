@@ -25,11 +25,15 @@ export default class Icon extends React.Component {
       }
     }
   }
+  handleClick = (e) => {
+    const { onClick } = this.props
+    onClick && onClick(e)
+  }
   render () {
     const { typeMap } = this.state
     const { class: type, style } = this.props
     return (
-      <i style={style} className={['iconfont', typeMap[type]].join(' ').trim()}></i>
+      <i style={style} className={['iconfont', typeMap[type]].join(' ').trim()} onClick={this.handleClick}></i>
     )
   }
 }

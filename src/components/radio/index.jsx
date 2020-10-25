@@ -19,21 +19,28 @@ class Radio extends React.PureComponent {
     const { children, disabled, value, checked } = this.props
     return (
       <label className="ling-radio-wrapper" >
-      <RadioContext.Consumer>
-        {(obj) => {
-          const {checkedValue, onChange} = obj || {}
-          return (
-            <>
-            
-              <input type="radio" className='ling-radio' checked={checkedValue ? value === checkedValue ? true : false : checked} disabled={disabled ? true : false}  value={value} onChange={(e) => {
-                onChange && onChange(e.target.value, e)
-              }}/>
-              <span className='ling-radio-btn'></span>
-              <span className='ling-radio-text'>{children}</span>
-            </>
-          )
-        }}
-      </RadioContext.Consumer>
+        <RadioContext.Consumer>
+          {(obj) => {
+            const { checkedValue, onChange } = obj || {}
+            return (
+              <>
+
+                <input
+                  type="radio"
+                  className='ling-radio'
+                  checked={checkedValue ? value === checkedValue ? true : false : checked}
+                  disabled={disabled ? true : false}
+                  value={value}
+                  onChange={(e) => {
+                    onChange && onChange(e.target.value, e)
+                  }}
+                />
+                <span className='ling-radio-btn'></span>
+                <span className='ling-radio-text'>{children}</span>
+              </>
+            )
+          }}
+        </RadioContext.Consumer>
       </label>
     )
   }

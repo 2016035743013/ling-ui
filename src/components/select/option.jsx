@@ -1,12 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { classNames } from '../../common/common'
+import { SelectContext } from './context'
 class Option extends React.Component {
   constructor(props) {
     super(props)
-  }
-  selectItem = () => {
-    console.log(this.context)
   }
   parent () {
     return this.context.component;
@@ -14,11 +12,23 @@ class Option extends React.Component {
   render () {
     const { vlaue, disabled } = this.props
     return (
-      <div className={classNames('ling-option-item')} onClick={this.selectItem}>
-        {this.props.children}
-      </div>
+      <SelectContext.Consumer>
+        {
+          ({ selectItem }) => {
+            return (
+              <div
+                className={classNames('ling-option-item')}
+                onClick={() => {
+                  selectItem && selectItem(this.props.children)
+                }}
+              >
+                {this.props.children}
+              </div>
+            )
+          }
+        }
+      </SelectContext.Consumer>
     )
   }
 }
-
 export default Option
