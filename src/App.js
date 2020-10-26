@@ -4,7 +4,7 @@
 import React from 'react';
 import { Select, Message, Tooltip, Alert, Slider, Switch, Pagination } from './components/index'
 import './App.scss'
-const { Option } = Select
+const { Option, OptionGroup } = Select
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -31,13 +31,17 @@ class App extends React.Component {
     const { value, isSelect, inputValue } = this.state
     return (
       <div className="App">
-        <Select defaultValue="lucy" style={{ width: 120 }} onChange={this.handleChange} allowClear>
-          <Option value="jack">Jack</Option>
-          <Option value="lucy">Lucy</Option>
-          <Option value="disabled" disabled>
-            Disabled
-          </Option>
-          <Option value="Yiminghe">yiminghe</Option>
+        <Select defaultValue="Lucy" style={{ width: 120 }} onChange={this.handleChange} allowClear autofocus>
+          <OptionGroup label='man'>
+            <Option value="Jack">Jack</Option>
+            <Option value="Lucy">Lucy</Option>
+          </OptionGroup>
+          <OptionGroup label='man'>
+            <Option value="Disabled" disabled>
+              Disabled
+            </Option>
+            <Option value="yiminghe">yiminghe</Option>
+          </OptionGroup>
         </Select>
       </div>
     );

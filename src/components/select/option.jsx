@@ -10,16 +10,16 @@ class Option extends React.Component {
     return this.context.component;
   }
   render () {
-    const { vlaue, disabled } = this.props
+    const { value, disabled } = this.props
     return (
       <SelectContext.Consumer>
         {
-          ({ selectItem }) => {
+          ({ selectItem, value: selectValue }) => {
             return (
               <div
-                className={classNames('ling-option-item')}
+                className={classNames('ling-option-item', { 'ling-option-disabled': disabled }, { 'ling-option-selected': selectValue === value })} //selectValue === value 
                 onClick={() => {
-                  selectItem && selectItem(this.props.children)
+                  !disabled && selectItem && selectItem(this.props.children)
                 }}
               >
                 {this.props.children}

@@ -13,13 +13,17 @@ class Select extends React.Component {
       value: '',
       isShow: false
     }
+    this.inputRef = React.createRef()
   }
 
   componentDidMount () {
-    const { defaultValue } = this.props
+    const { defaultValue, autofocus } = this.props
     this.setState({
       value: defaultValue
     })
+    if (autofocus) {
+      this.inputRef.current.focus()
+    }
   }
   // 点击select之外触发的事件
   handleClickOutside = () => {
@@ -38,7 +42,7 @@ class Select extends React.Component {
     // })
   }
   toggleOptions = (e) => {
-    this.setState((state) => {
+    !this.props.disabled && this.setState((state) => {
       return {
         isShow: !state.isShow
       }
@@ -56,20 +60,21 @@ class Select extends React.Component {
   selectItem = (value) => {
     // console.log(value)
     this.setState({
-      value
+      value,
+      isShow: false
     })
   }
   render () {
     const { isShow, value } = this.state
-    const { defaultValue, style, allowClear } = this.props
+    const { style, allowClear, disabled } = this.props
     return (
       <div className="ling-select-wrapper">
         <div
-          className="ling-select-input"
+          className={classNames("ling-select-input", { 'ling-select-focus': isShow && !disabled }, { 'ling-select-disabled': disabled })}
           style={style}
           onClick={this.toggleOptions}
         >
-          <input type="text" value={value} onChange={this.handleChange} onFocus={this.handleFocus} />
+          <input type="text" value={value} onChange={this.handleChange} onFocus={this.handleFocus} ref={this.inputRef} />
           {/* <div className="ling-select-text">{value}</div> */}
           <span className={classNames({ 'allow-clear': allowClear })} >
             <Icon class="down" />
@@ -79,7 +84,7 @@ class Select extends React.Component {
         <div
           className={classNames('ling-select-options', { 'ling-select-options-show': isShow })}
         >
-          <SelectContext.Provider value={{ selectItem: this.selectItem }}>
+          <SelectContext.Provider value={{ selectItem: this.selectItem, value }}>
             {this.props.children}
           </SelectContext.Provider>
         </div>
@@ -87,6 +92,10 @@ class Select extends React.Component {
     )
   }
 }
-
+Select.propTypes = {
+  allowClear: PropTypes.bool,
+  autoFocus: PropTypes.bool,
+  defaultValue: PropTypes.string,
+}
 
 export default ClickOutside(Select)

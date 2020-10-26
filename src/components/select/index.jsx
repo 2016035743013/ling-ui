@@ -3,6 +3,6 @@ import optionGroup from './optionGroup'
 import Option from './option'
 
 Select.Option = Option
-Select.optionGroup = optionGroup
+Select.OptionGroup = optionGroup
 
 export default Select
