@@ -1,5 +1,4 @@
-
-@import '../../style/theme.scss';
+@import "../../style/theme.scss";
 .ling-alert-wrapper {
   background: $successColor;
   padding: 10px;
@@ -7,9 +6,17 @@
   color: white;
   display: flex;
   font-size: 14px;
-  align-items: center; 
+  align-items: center;
   border-radius: 4px;
-  .icon-warning, .icon-success, .icon-error_3, .icon-info, .ling-alert-title { 
+  transition: all 0.5s;
+  transform-origin: top center;
+  opacity: 1;
+  transform: scaleY(1);
+  .icon-warning,
+  .icon-success,
+  .icon-error_3,
+  .icon-info,
+  .ling-alert-title {
     cursor: auto;
   }
   .ling-alert-icon-big {
@@ -38,4 +45,8 @@
     color: white;
     margin-top: 5px;
   }
+}
+.ling-alert-close {
+  transform: scaleY(0);
+  opacity: 0;
 }

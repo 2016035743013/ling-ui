@@ -1,14 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Icon from '../icon'
+import { classNames } from '../../common/common'
 import './index.scss'
 class Alert extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       visible: true,
-      bgColor: {
-        warning: 'rgb(250, 173,20)',
+      messageType: {
+        warning: '#faad14',
         success: '#67C23A',
         error: '#ff4d4f',
         info: '#909399'
@@ -16,40 +17,56 @@ class Alert extends React.Component {
     }
   }
   close = () => {
+    const { afterClose } = this.props
     this.setState({
       visible: false
     })
+    afterClose && afterClose()
   }
-  render() {
-    const {visible, bgColor } = this.state
-    const { title, description, showIcon, type } = this.props
+  render () {
+    const { visible, messageType } = this.state
+    const { message, description, closable, type, closeText } = this.props
     return (
-      visible && <div className="ling-alert-wrapper" style={{background: bgColor[type]}}>
-        <Icon class='warning' type={type} style={description ? {fontSize: '22px'} : {}} />
+      <div
+        className={classNames("ling-alert-wrapper", { 'ling-alert-close': !visible })}
+        style={{ background: messageType[type] }}
+      >
+        <Icon class={type} style={description ? { fontSize: '22px' } : {}} />
         <div className="ling-alert-container">
-          <div className={['ling-alert-title', description ? 'ling-alert-title-bold' : ''].join(' ').trim()}>
-            <span>{title}</span>
-            {showIcon && <span onClick={this.close}> <Icon class='close' /></span>}
+          <div
+            className={
+              classNames('ling-alert-title', { 'ling-alert-title-bold': description })
+            }
+          >
+            <span>{message}</span>
+            {
+              closable &&
+              <span onClick={this.close}>
+                {(closeText || <Icon class='close' />)}
+              </span>
+            }
           </div>
           {
-            description && 
+            description &&
             <div className="ling-alert-description">
               {description}
             </div>
           }
         </div>
-      </div>
+      </div >
     )
   }
 }
 
 Alert.propTypes = {
-  showIcon: PropTypes.bool,
+  closable: PropTypes.bool,
   type: PropTypes.string,
-  description: PropTypes.string
+  description: PropTypes.string,
+  afterClose: PropTypes.func,
+  closeText: PropTypes.node
 }
 Alert.defaultProps = {
-  showIcon: false,
+  closable: false,
   type: 'success',
   description: ''
 }
