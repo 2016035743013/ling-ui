@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { classNames } from '../../common/common'
+import { classNames } from '../common/common'
 import { SelectContext } from './context'
 class Option extends React.Component {
   constructor(props) {

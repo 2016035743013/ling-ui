@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Icon from '../icon'
-import { classNames } from '../../common/common'
+import { classNames } from '../common/common'
 import './index.scss'
 class Alert extends React.Component {
   constructor(props) {
@@ -63,7 +63,8 @@ Alert.propTypes = {
   type: PropTypes.string,
   description: PropTypes.string,
   afterClose: PropTypes.func,
-  closeText: PropTypes.node
+  closeText: PropTypes.node,
+  message: PropTypes.string
 }
 Alert.defaultProps = {
   closable: false,

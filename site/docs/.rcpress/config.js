@@ -4,8 +4,7 @@ module.exports = {
   themeConfig: {
     nav: [
       { text: 'Home', link: '/', important: true }, // 标签右上会有红点显示
-      { text: 'Guide', link: '/guide/' },
-      { text: 'External', link: 'https://google.com' }
+      { text: 'Guide', link: '/guide/' }
     ],
     sidebar: {
       '/foo/': [

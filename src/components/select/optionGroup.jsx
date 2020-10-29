@@ -1,5 +1,5 @@
 import React from 'react'
-import { classNames } from '../../common/common'
+import { classNames } from '../common/common'
 import "./index.scss"
 class OptionGroup extends React.Component {
   constructor(props) {

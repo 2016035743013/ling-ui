@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Icon from '../icon'
-import { classNames } from '../../common/common'
+import { classNames } from '../common/common'
 import './index.scss'
 export default class Pagination extends React.Component {
   constructor(props) {

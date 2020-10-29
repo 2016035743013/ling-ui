@@ -1,4 +1,3 @@
----
-home: true
----
-test
+import { ShowTime } from './one';
+
+<ShowTime />

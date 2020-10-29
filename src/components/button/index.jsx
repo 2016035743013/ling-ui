@@ -1,6 +1,6 @@
 import React from 'react'
 import './index.scss'
-import { prefix } from '../../common/common.js'
+import { prefix } from '../common/common.js'
 import PropTypes from 'prop-types'
 
 class Button extends React.Component {

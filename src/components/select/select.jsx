@@ -1,8 +1,8 @@
 import React from 'react'
 import Icon from '../icon'
 import PropTypes from 'prop-types'
-import { ClickOutside } from '../../tools'
-import { classNames } from '../../common/common'
+import { ClickOutside } from '../tools'
+import { classNames } from '../common/common'
 import { SelectContext } from './context'
 import './index.scss'
 
