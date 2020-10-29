@@ -1,0 +1,52 @@
+@import "../../style/theme.scss";
+.ling-alert-wrapper {
+  background: $successColor;
+  padding: 10px;
+  box-sizing: border-box;
+  color: white;
+  display: flex;
+  font-size: 14px;
+  align-items: center;
+  border-radius: 4px;
+  transition: all 0.5s;
+  transform-origin: top center;
+  opacity: 1;
+  transform: scaleY(1);
+  .icon-warning,
+  .icon-success,
+  .icon-error_3,
+  .icon-info,
+  .ling-alert-title {
+    cursor: auto;
+  }
+  .ling-alert-icon-big {
+    font-size: 20px;
+  }
+  .ling-alert-container {
+    margin-left: 10px;
+    flex: 1;
+    color: white;
+    .ling-alert-title {
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      align-items: center;
+      i {
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+    .ling-alert-title-bold {
+      font-weight: bold;
+    }
+  }
+  .ling-alert-description {
+    color: white;
+    margin-top: 5px;
+  }
+}
+.ling-alert-close {
+  transform: scaleY(0);
+  opacity: 0;
+}
