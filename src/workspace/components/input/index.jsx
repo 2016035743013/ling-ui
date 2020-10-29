@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Icon } from '../index'
+import { Icon } from '../icon'
 import "./index.scss"
 
 class Input extends React.PureComponent {
@@ -33,7 +33,7 @@ class Input extends React.PureComponent {
     const { onBlur } = this.props
     onBlur && onBlur(e)
   }
-  renderInput() {
+  renderInput () {
     const { placeholder, value, maxLength, disabled, onChange, type, autoFocus } = this.props
     return (
       <input
@@ -74,7 +74,7 @@ class Input extends React.PureComponent {
       }
     })
   }
-  render() {
+  render () {
     const {
       allowClear,
       prefix,

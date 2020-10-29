@@ -1,6 +1,6 @@
 {
   "name": "ling-ui",
-  "version": "0.1.2",
+  "version": "0.1.7",
   "private": false,
   "main": "lib/index.js",
   "module": "esm/index.js",
@@ -23,13 +23,13 @@
   ],
   "scripts": {
     "start": "react-scripts start",
-    "build": "npm run build:commonjs & npm run build:esm & npm run copy-css:esm & npm run copy-css:lib",
+    "build": "npm run build:commonjs & npm run build:esm & npm run copy-css:esm & npm run copy-css:lib & npm publish",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:commonjs": "cross-env BABEL_OUTPUT=commonjs babel src/workspace --out-dir lib/ --ignore **/__tests__,**/__mocks__",
     "build:esm": "babel src/workspace --out-dir esm/ --ignore **/__tests__,**/__mocks__",
-    "copy-css:esm": "cpx \"src/components/**/*.scss\" esm",
-    "copy-css:lib": "cpx \"src/components/**/*.scss\" lib"
+    "copy-css:esm": "cpx \"src/workspace/**/*.scss\" esm",
+    "copy-css:lib": "cpx \"src/workspace/**/*.scss\" lib"
   },
   "eslintConfig": {
     "extends": "react-app"

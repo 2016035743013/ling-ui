@@ -2,7 +2,7 @@
 // 组件库参考文章  https://juejin.im/post/6844903749912100871#heading-6
 
 import React from 'react';
-import { Select, Message, Tooltip, Alert, Slider, Switch, Pagination } from './components/index'
+import { Select, Message, Tooltip, Alert, Slider, Switch, Pagination } from './workspace/index'
 import './App.scss'
 const { Option, OptionGroup } = Select
 class App extends React.Component {

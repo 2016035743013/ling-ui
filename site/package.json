@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "ling-ui": "^0.1.1",
+    "ling-ui": "^0.1.7",
     "moment": "^2.29.1"
   },
   "devDependencies": {
