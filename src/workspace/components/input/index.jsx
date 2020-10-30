@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Icon } from '../icon'
+import Icon from '../icon'
 import "./index.scss"
 
 class Input extends React.PureComponent {

@@ -2,7 +2,7 @@
 // 组件库参考文章  https://juejin.im/post/6844903749912100871#heading-6
 
 import React from 'react';
-import { Select, Message, Tooltip, Alert, Slider, Switch, Pagination } from './workspace/index'
+import { Select, Message, Tooltip, Alert, Slider, Switch, Pagination, Button } from './workspace/index'
 import './App.scss'
 const { Option, OptionGroup } = Select
 class App extends React.Component {
@@ -21,15 +21,7 @@ class App extends React.Component {
     const { value, isSelect, inputValue } = this.state
     return (
       <div className="App">
-        <Alert
-          message="testtest"
-          afterClose={this.handleClose}
-          description='testestt'
-          closable={true}
-          closeText={
-            <span>teste</span>
-          }
-        />
+        <Button ghost>按钮</Button>
       </div>
     );
   }

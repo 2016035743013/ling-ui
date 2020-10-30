@@ -22,6 +22,7 @@ export default class Icon extends React.Component {
         doubleRight: 'icon-youfanyeyouhua',
         doubleLeft: 'icon-zuofanyezuohua',
         more: 'icon-gengduo',
+        loading: 'icon-loading'
       }
     }
   }

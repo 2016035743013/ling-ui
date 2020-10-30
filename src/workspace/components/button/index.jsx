@@ -1,25 +1,10 @@
 import React from 'react'
 import './index.scss'
-import { prefix } from '../../common/common.js'
+import { prefix, classNames } from '../../common/common.js'
+import Icon from '../icon'
 import PropTypes from 'prop-types'
 
 class Button extends React.Component {
-  static propTypes = {
-    text: PropTypes.string,
-    block: PropTypes.bool,
-    danger: PropTypes.bool,
-    disabled: PropTypes.bool,
-    ghost: PropTypes.bool,
-    href: PropTypes.string,
-    htmlType: PropTypes.string,
-    icon: PropTypes.node,
-    loading: PropTypes.bool,
-    shape: PropTypes.string,
-    size: PropTypes.string,
-    target: PropTypes.string,
-    type: PropTypes.string,
-    onClick: PropTypes.func
-  }
   handleClick = (e) => {
     this.props.onClick && this.props.onClick(e)
   }
@@ -34,28 +19,50 @@ class Button extends React.Component {
       case 'text': buttonType += 'text'; break;
       default: buttonType += 'default'; break;
     }
-    return [disabled ? '' : buttonType, shape ? prefix + shape : '', disabled ? 'ling-disabled' : '', size ? prefix + size : '', ghost ? 'ling-ghost' : ''].join(' ').trim()
+    // return [disabled ? '' : buttonType, shape ? prefix + shape : '', disabled ? 'ling-disabled' : '', size ? prefix + size : '', ghost ? 'ling-ghost' : ''].join(' ').trim()
+    return classNames({
+      [buttonType]: !disabled,
+      [prefix + shape]: shape,
+      'ling-disabled': disabled,
+      [prefix + size]: size,
+      'ling-ghost': ghost
+    })
   }
   render () {
     const { children, icon, loading, target } = this.props
     return (
-      target 
-      ?
-      <a href={target} className={this.setBtnClass()} onClick={this.handleClick}>
-        {
-          loading ? <span className='ling-loading'> <i className='iconfont'>&#xe6cd;</i> </span> : ''
-        }
-        {icon}{children}
-      </a> 
-      : 
-      <div className={this.setBtnClass()} onClick={this.handleClick}>
-        {
-          loading ? <span className='ling-loading'> <i className='iconfont'>&#xe6cd;</i> </span> : ''
-        }
-        {icon}{children}
-      </div>
+      target
+        ?
+        <a href={target} className={this.setBtnClass()} onClick={this.handleClick}>
+          {
+            loading ? <span className='ling-loading'> <Icon class="loading" /> </span> : ''
+          }
+          {icon}{children}
+        </a>
+        :
+        <div className={this.setBtnClass()} onClick={this.handleClick}>
+          {
+            loading ? <span className='ling-loading'> <Icon class="loading" /> </span> : ''
+          }
+          {icon}{children}
+        </div>
     )
   }
 }
-
+Button.propTypes = {
+  text: PropTypes.string,
+  block: PropTypes.bool,
+  danger: PropTypes.bool,
+  disabled: PropTypes.bool,
+  ghost: PropTypes.bool,
+  href: PropTypes.string,
+  htmlType: PropTypes.string,
+  icon: PropTypes.node,
+  loading: PropTypes.bool,
+  shape: PropTypes.string,
+  size: PropTypes.string,
+  target: PropTypes.string,
+  type: PropTypes.string,
+  onClick: PropTypes.func
+}
 export default Button
