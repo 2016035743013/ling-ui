@@ -1,4 +1,4 @@
-@import '../../style/theme.scss';
+@import "../../style/theme.scss";
 .ling-common {
   -webkit-tap-highlight-color: transparent;
   --antd-wave-shadow-color: $primaryColor;
@@ -17,9 +17,9 @@
   white-space: nowrap;
   text-align: center;
   background-image: none;
-  box-shadow: 0 2px 0 rgba(0,0,0,.015);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
   cursor: pointer;
-  transition: all .3s cubic-bezier(.645,.045,.355,1);
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   user-select: none;
   touch-action: manipulation;
   height: 32px;
@@ -38,10 +38,8 @@
       animation: loadingCircle 1s linear infinite;
       -webkit-animation: loadingCircle 1s linear infinite;
       display: inline-block;
-      margin-right: 5px;
     }
-    @keyframes loadingCircle
-    {
+    @keyframes loadingCircle {
       from {
         transform: rotate(0deg);
       }
@@ -53,11 +51,11 @@
 }
 .ling-default {
   @extend .ling-common;
-  color: rgba(0,0,0,.85);
+  color: rgba(0, 0, 0, 0.85);
   background: #fff;
   &:hover {
     color: $primaryColor;
-    border-color: $primaryColor;;
+    border-color: $primaryColor;
   }
 }
 .ling-primary {
@@ -65,8 +63,8 @@
   color: #fff;
   background: $primaryColor;
   border-color: $primaryColor;
-  text-shadow: 0 -1px 0 rgba(0,0,0,.12);
-  box-shadow: 0 2px 0 rgba(0,0,0,.045);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
   &:hover {
     filter: brightness(1.1);
   }
@@ -82,13 +80,13 @@
 }
 .ling-ghost {
   @extend .ling-common;
-  color: rgba(0,0,0,.85);
+  color: rgba(0, 0, 0, 0.85);
   background: transparent;
   border-color: #d9d9d9;
   border-style: dashed;
   &:hover {
     color: $primaryColor;
-    border-color: $primaryColor;;
+    border-color: $primaryColor;
   }
 }
 .ling-text {
@@ -98,7 +96,7 @@
   margin-right: 8px;
   margin-bottom: 12px;
   &:hover {
-    background: #F2F6FC;
+    background: #f2f6fc;
   }
 }
 .ling-link {
@@ -108,13 +106,12 @@
   border-color: transparent;
   box-shadow: none;
 }
-
 .ling-circle {
   width: 32px;
   height: 32px;
   padding: 2.4px 0;
   font-size: 16px;
-  vertical-align: -.5px;
+  vertical-align: -0.5px;
   min-width: 32px;
   padding-right: 0;
   padding-left: 0;
@@ -136,7 +133,7 @@
 .ling-disabled {
   @extend .ling-common;
   cursor: not-allowed;
-  color: rgba(0,0,0,.25);
+  color: rgba(0, 0, 0, 0.25);
   background: #f5f5f5;
   border-color: #d9d9d9;
   text-shadow: none;
@@ -152,4 +149,8 @@
   height: 24px;
   padding: 0 12px;
   font-size: 14px;
+}
+
+.ling-button-icon {
+  margin-right: 8px;
 }

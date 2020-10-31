@@ -12,6 +12,7 @@
   transform-origin: top center;
   opacity: 1;
   transform: scaleY(1);
+  position: relative;
   .icon-warning,
   .icon-success,
   .icon-error_3,
@@ -47,6 +48,6 @@
   }
 }
 .ling-alert-close {
-  transform: scaleY(0);
   opacity: 0;
+  transform: translateY(-100%);
 }
