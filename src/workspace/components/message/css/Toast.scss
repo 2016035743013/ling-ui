@@ -1,14 +1,14 @@
-@import '../../../style/theme.scss';
+@import "../../../style/theme.scss";
 .ling-toast-wrapper {
   display: inline-block;
-  margin-top: 15px;
+  margin: 15px auto 0px;
   background: white;
-  box-shadow: 0 3px 6px -4px rgba(0,0,0,.12), 0 6px 16px 0 rgba(0,0,0,.08), 0 9px 28px 8px rgba(0,0,0,.05);
+  box-shadow: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 9px 28px 8px rgba(0, 0, 0, 0.05);
   border-radius: 3px;
   padding: 10px 16px;
+  transition: all 0.3s linear;
   opacity: 0;
   transform: translateY(-100%);
-  transition: all .5s;
   position: relative;
   i {
     color: $primaryColor;
@@ -29,7 +29,7 @@
     color: $infoColor;
   }
   span {
-    color: rgba(0,0,0,.85);
+    color: rgba(0, 0, 0, 0.85);
     font-size: 14px;
     font-variant: tabular-nums;
     line-height: 1.5715;

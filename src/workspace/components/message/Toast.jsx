@@ -1,36 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { classNames } from '../../common/common'
+import Icon from '../icon'
 import './css/Toast.scss'
 export default class Toast extends React.Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      visible: true,
-      remove: false,
-      iconMap: {
-        warning: 'icon-info',
-        info: 'icon-info',
-        success: 'icon-success',
-        error: 'icon-error_3'
-      }
+      visible: false,
+      remove: false
     }
   }
-  componentDidMount() {
-    this.setState({
-      visible: true
-    })
-
+  componentDidMount () {
+    setTimeout(() => {
+      this.setState({
+        visible: true
+      })
+    }, 100);
     this.startTimer();
   }
-  componentWillUnmount() {
-    console.log('remove')
+  componentWillUnmount () {
     this.stopTimer();
   }
-  stopTimer() {
+  stopTimer () {
     clearTimeout(this.timeout);
   }
-  onClose() {
+  onClose () {
     this.stopTimer();
 
     this.setState({
@@ -40,26 +36,29 @@ export default class Toast extends React.Component {
       this.setState({
         remove: true
       })
-      this.props.willUnmount(); 
+      this.props.willUnmount();
     }, 500);
   }
-  startTimer() {
+  startTimer () {
     if (this.props.duration > 0) {
       this.timeout = setTimeout(() => {
         this.onClose();
       }, this.props.duration)
     }
   }
-  render() {
-    const { visible, remove, iconMap } = this.state
+  render () {
+    const { visible, remove } = this.state
     const { text, type } = this.props
     return (
-      !remove && 
-      <div 
-        className={['ling-toast-wrapper', visible ? 'ling-toast-wrapper-show' : ''].join(' ').trim()} onMouseEnter={this.stopTimer.bind(this)} 
+      !remove &&
+      <div
+        className={
+          classNames('ling-toast-wrapper', { 'ling-toast-wrapper-show': visible })
+        }
+        onMouseEnter={this.stopTimer.bind(this)}
         onMouseLeave={this.startTimer.bind(this)}
       >
-        <i className={['iconfont', iconMap[type]].join(' ').trim()}></i>
+        <Icon class={type} />
         <span>{text}</span>
       </div>
     )
@@ -70,13 +69,11 @@ Toast.propTypes = {
   type: PropTypes.oneOf(['success', 'warning', 'info', 'error']),
   text: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
   duration: PropTypes.number,
-  showClose: PropTypes.bool,
   customClass: PropTypes.string,
   iconClass: PropTypes.string
 }
 
 Toast.defaultProps = {
   type: 'info',
-  duration: 3000,
-  showClose: false
+  duration: 3000
 }

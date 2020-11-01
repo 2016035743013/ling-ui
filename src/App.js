@@ -13,11 +13,15 @@ class App extends React.Component {
       loading1: false
     }
   }
+  showMessage = () => {
+    Message.success({
+      text: '这是提示信息'
+    })
+  }
   render () {
-    const { loading, loading1 } = this.state
     return (
       <div className="App">
-        <Button size="default">默认按钮</Button>
+        <Button size="default" onClick={this.showMessage}>提示信息</Button>
         <Button type='primary'>primary按钮</Button>
         <Button type='danger'>danger按钮</Button>
       </div>

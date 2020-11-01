@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom';
 import Toast from './Toast'
 import './css/index.scss'
-export default function Message(props = {}, type) {
+export default function Message (props = {}, type) {
   const div = document.createElement('div');
   const messageBox = document.getElementsByClassName('ling-message-content')[0];
   if (messageBox) {
@@ -14,7 +14,6 @@ export default function Message(props = {}, type) {
     messageBox.appendChild(div);
     document.body.appendChild(messageBox);
   }
-
   if (typeof props === 'string' || React.isValidElement(props)) {
     props = {
       message: props
