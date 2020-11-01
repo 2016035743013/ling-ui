@@ -2,8 +2,7 @@
 // 组件库参考文章  https://juejin.im/post/6844903749912100871#heading-6
 
 import React from 'react';
-import { Select, message, Tooltip, Alert, Slider, Switch, Pagination, Button, Icon } from './workspace/index'
-import './App.scss'
+import { message, Button } from 'ling-ui'
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -48,9 +47,9 @@ class App extends React.Component {
       <div className="App">
         <Button onClick={this.infoMessge}>infoMessge</Button>
         <Button onClick={this.wanringMessge}>wanringMessge</Button>
-        <Button type='primary' onClick={this.loadingMessge}>loadingMessge</Button>
         <Button type='primary' onClick={this.successMessge}>successMessge</Button>
         <Button type='danger' onClick={this.errorMessge}>errorMessge</Button>
+        <Button type='primary' onClick={this.loadingMessge}>loadingMessge</Button>
       </div>
     );
   }
