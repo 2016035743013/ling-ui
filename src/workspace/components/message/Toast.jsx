@@ -21,14 +21,13 @@ export default class Toast extends React.Component {
     this.startTimer();
   }
   componentWillUnmount () {
-    this.stopTimer();
+    this.clearTimer();
   }
-  stopTimer () {
+  clearTimer () {
     clearTimeout(this.timeout);
   }
   onClose () {
-    this.stopTimer();
-
+    this.clearTimer();
     this.setState({
       visible: false
     });
@@ -37,6 +36,9 @@ export default class Toast extends React.Component {
         remove: true
       })
       this.props.willUnmount();
+      if (this.props.onClose instanceof Function) {
+        this.props.onClose();
+      }
     }, 500);
   }
   startTimer () {
@@ -48,29 +50,30 @@ export default class Toast extends React.Component {
   }
   render () {
     const { visible, remove } = this.state
-    const { text, type } = this.props
+    const { message, type } = this.props
     return (
       !remove &&
       <div
         className={
           classNames('ling-toast-wrapper', { 'ling-toast-wrapper-show': visible })
         }
-        onMouseEnter={this.stopTimer.bind(this)}
+        onMouseEnter={this.clearTimer.bind(this)}
         onMouseLeave={this.startTimer.bind(this)}
       >
         <Icon class={type} />
-        <span>{text}</span>
+        <span>{message}</span>
       </div>
     )
   }
 }
 
 Toast.propTypes = {
-  type: PropTypes.oneOf(['success', 'warning', 'info', 'error']),
-  text: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
+  type: PropTypes.oneOf(['success', 'warning', 'info', 'error', 'loading']),
+  message: PropTypes.oneOfType([PropTypes.string, PropTypes.element]).isRequired,
   duration: PropTypes.number,
   customClass: PropTypes.string,
-  iconClass: PropTypes.string
+  iconClass: PropTypes.string,
+  onClose: PropTypes.func
 }
 
 Toast.defaultProps = {

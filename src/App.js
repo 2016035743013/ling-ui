@@ -14,9 +14,12 @@ class App extends React.Component {
     }
   }
   showMessage = () => {
-    Message.success({
-      text: '这是提示信息'
+    Message.loading({
+      message: '这是提示信息',
+      onClose: () => {
+      }
     })
+    Message.info('这是提示信息')
   }
   render () {
     return (
