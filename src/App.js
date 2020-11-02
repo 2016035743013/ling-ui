@@ -2,7 +2,7 @@
 // 组件库参考文章  https://juejin.im/post/6844903749912100871#heading-6
 
 import React from 'react';
-import { Select, message, Tooltip, Alert, Slider, Switch, Pagination, Button, Icon } from './workspace/index'
+import { Select, message, Tooltip, Alert, Slider, Switch, Pagination, Button, Checkbox } from './workspace/index'
 import './App.scss'
 class App extends React.Component {
   constructor(props) {
@@ -44,13 +44,11 @@ class App extends React.Component {
     })
   }
   render () {
+    // const {} = this.props
     return (
       <div className="App">
-        <Button onClick={this.infoMessge}>infoMessge</Button>
-        <Button onClick={this.wanringMessge}>wanringMessge</Button>
-        <Button type='primary' onClick={this.loadingMessge}>loadingMessge</Button>
-        <Button type='primary' onClick={this.successMessge}>successMessge</Button>
-        <Button type='danger' onClick={this.errorMessge}>errorMessge</Button>
+        <Checkbox>复选框</Checkbox>
+        <Checkbox>复选框</Checkbox>
       </div>
     );
   }
