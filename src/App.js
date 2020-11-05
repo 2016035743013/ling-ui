@@ -7,18 +7,29 @@ import './App.scss'
 class App extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      checkVals: []
+    }
   }
   onChange = (e) => {
     console.log(e)
   }
+  handleGroupChange = (val) => {
+    console.log(val)
+    this.setState({
+      checkVals: ['1']
+    })
+  }
   render () {
-    // const {} = this.props
+    const { checkVals } = this.state
     return (
       <div className="App">
-        <CheckboxGroup value={[1, 2]}>
+        <CheckboxGroup value={checkVals} onChange={this.handleGroupChange}>
           <Checkbox value="1" onChange={this.onChange}>复选框</Checkbox>
           <Checkbox value="2" >复选框</Checkbox>
         </CheckboxGroup>
+        {/* <Checkbox value="2" >复选框</Checkbox> */}
+        <input type="checkbox" />
       </div>
     );
   }

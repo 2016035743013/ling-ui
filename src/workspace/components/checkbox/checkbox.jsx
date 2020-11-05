@@ -7,58 +7,53 @@ import PropTypes from 'prop-types'
 class CheckBox extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      isChecked: false
-    }
   }
-  toggleChecked = (e) => {
-    e.persist()
+  toggleChecked = (func, e) => {
+    const { value } = this.props
     const { onChange } = this.props
-    this.setState(({ isChecked }) => {
-      return {
-        isChecked: !isChecked
-      }
-    }, () => {
-      onChange && onChange(e)
-    })
+    e.persist()
+    func && func(value, e)
+    onChange && onChange(e.target.checked)
   }
-  componentDidMount () {
-    const { value, defaultChecked, checked } = this.props
-    this.setState({
-      isChecked: !!value || defaultChecked || checked
-    })
-  }
+
   render () {
-    const { checked, defaultChecked, value, name, disabled } = this.props
-    const { isChecked } = this.state
+    const { value, disabled, checked } = this.props
     return (
       <Consumer>
         {
-          ({
-            groupDisabled,
-            defaultCheckGroup,
-            checkGroup,
-            name,
-            
-          }) => {
+          (groupProps) => {
+            const {
+              groupDisabled,
+              defaultValue,
+              value: checkGroup,
+              name,
+              onGroupChange
+            } = groupProps
             return (
               <label className='ling-checkbox-wrapper'>
-                <input 
-                  className='ling-checkbox' 
-                  name={name} 
-                  disabled={disabled || groupDisabled} 
-                  type="checkbox" 
-                  checked={isChecked} 
+                <input
+                  className='ling-checkbox'
+                  name={name}
+                  disabled={disabled || groupDisabled}
+                  type="checkbox"
+                  checked={checked || (checkGroup && checkGroup.includes(value)) || (defaultValue && defaultValue.includes(value))}
                   onChange={(e) => {
-                    this.toggleChecked(e)
-                  }} 
+                    const { onChange } = this.props
+                    if (onGroupChange) {
+                      this.toggleChecked(onGroupChange, e)
+                    } else {
+                      this.toggleChecked(onChange, e)
+                    }
+                  }}
                 />
 
                 {/* 水波纹 */}
-                {isChecked && <span className="ling-checkbox-sport-circle"></span>}
+                {
+                  (checked || (checkGroup && checkGroup.includes(value)) || (defaultValue && defaultValue.includes(value))) && <span className="ling-checkbox-sport-circle"></span>
+                }
 
                 <span className='ling-checkbox-container'></span>
-                <span className="ling-checkbox-label" >
+                <span className="ling-checkbox-label">
                   {this.props.children}
                 </span>
               </label>
