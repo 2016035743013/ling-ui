@@ -1,13 +1,12 @@
-@import '../../style/theme.scss';
+@import "../../style/theme.scss";
 .ling-input-wrapper {
-  padding: 6.5px 11px;
-  display: inline-block;
+  padding: 4px 11px;
+  display: flex;
+  align-items: center;
   color: #262626;
   position: relative;
-  .ling-input-prefix {
-    vertical-align: middle;
-    margin-right: 5px;
-  }
+  z-index: 1;
+  width: 100%;
   .ling-input-wrapper-mark {
     position: absolute;
     top: 0px;
@@ -19,7 +18,7 @@
     border: 1px solid $infoColor;
     box-sizing: border-box;
     border-radius: 2px;
-    transition: all .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
   }
   &:hover {
     .ling-input-wrapper-mark {
@@ -29,8 +28,12 @@
   .ling-input {
     outline: none;
     border: 0;
+    line-height: 1.5;
+    flex: 1;
+    margin-left: 2px;
+    z-index: 2;
     &::placeholder {
-      color: rgb(191 ,191, 191);
+      color: rgb(191, 191, 191);
       text-overflow: ellipsis;
     }
     &:focus {
@@ -50,11 +53,22 @@
   }
   .icon-clear {
     color: #ccc;
+    margin: 0px 4px;
+    cursor: pointer;
+    font-size: 12px;
     &:hover {
       color: #555;
     }
   }
-  .ling-input-suffix {
-    vertical-align: middle;
+  .ling-input-eyes {
+    font-size: 0px;
+    margin-right: 4px;
+    cursor: pointer;
   }
+}
+.ling-input-large {
+  padding: 6.5px 11px;
+}
+.ling-input-small {
+  padding: 1px 7px;
 }

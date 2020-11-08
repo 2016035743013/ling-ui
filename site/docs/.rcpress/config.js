@@ -28,6 +28,7 @@ module.exports = {
         // },
         ['alert', 'Alert 警告提示'],
         ['button', 'Button 按钮'],
+        ['Input', 'Input 输入框'],
         ['message', 'Message 消息提示']
       ]
     },

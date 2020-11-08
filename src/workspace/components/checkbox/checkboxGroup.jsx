@@ -4,20 +4,20 @@ import PropTypes from 'prop-types'
 class CheckboxGroup extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      checkVal: []
-    }
   }
+
   onGroupChange = (e, val) => {
-    console.log(val)
-    this.setState(({ checkVal }) => {
-      return {
-        checkVal: Array.from(new Set([checkVal])).push(val)
+    const { onChange, value } = this.props
+    let checkArr = JSON.parse(JSON.stringify(value))
+    if (e.target.checked) {
+      checkArr = Array.from(new Set([...checkArr, val]))
+    } else {
+      const deleteIndex = checkArr.indexOf(val)
+      if (deleteIndex !== -1) {
+        checkArr.splice(deleteIndex, 1)
       }
-    }, () => {
-      const { onChange } = this.props
-      onChange && onChange(this.checkVal)
-    })
+    }
+    onChange && onChange(checkArr)
   }
   render () {
     return (
@@ -31,8 +31,7 @@ class CheckboxGroup extends React.Component {
 }
 
 CheckboxGroup.propTypes = {
-  value: PropTypes.array,
-  defaultValue: PropTypes.array,
+  value: PropTypes.array.isRequired,
   onChange: PropTypes.func,
   name: PropTypes.string,
   disabled: PropTypes.bool

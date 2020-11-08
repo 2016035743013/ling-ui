@@ -1,4 +1,5 @@
 import React from 'react'
+import { classNames } from '../../common/common'
 import './index.scss'
 export default class Icon extends React.Component {
   constructor(props) {
@@ -7,8 +8,8 @@ export default class Icon extends React.Component {
       typeMap: {
         search: 'icon-LC_icon_search_line',
         clear: 'icon-clear',
-        user: 'icon-user',
-        'open-eye': 'icon-eye1',
+        user: 'icon-user1',
+        'open-eye': 'icon-Openeyes',
         'hide-eye': 'icon-eye',
         up: 'icon-up',
         down: 'icon-down',
@@ -34,7 +35,7 @@ export default class Icon extends React.Component {
     const { typeMap } = this.state
     const { class: type, style } = this.props
     return (
-      <i style={style} className={['iconfont', typeMap[type]].join(' ').trim()} onClick={this.handleClick}></i>
+      <i style={style} className={classNames('iconfont', typeMap[type])} onClick={this.handleClick}></i>
     )
   }
 }

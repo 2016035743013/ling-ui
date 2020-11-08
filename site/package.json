@@ -1,7 +1,10 @@
 {
   "dependencies": {
-    "ling-ui": "^0.1.13",
+    "ling-ui": "^0.1.17",
     "moment": "^2.29.1"
+  },
+  "scripts": {
+    "dev": "rcpress dev"
   },
   "devDependencies": {
     "node-sass": "^4.14.1",

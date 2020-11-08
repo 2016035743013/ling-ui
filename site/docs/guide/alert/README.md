@@ -9,7 +9,7 @@ import "./index.scss"
 <Alert message='提示文案' type='error'/>
 
 - Alert 组件提供四种主题，由`type`属性指定，默认值为`info`。
-```jsx
+```js
 render () {
   return () {
     <div>

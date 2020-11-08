@@ -2,34 +2,33 @@
 // 组件库参考文章  https://juejin.im/post/6844903749912100871#heading-6
 
 import React from 'react';
-import { Select, message, Tooltip, Alert, Slider, Switch, Pagination, Button, Checkbox, CheckboxGroup } from './workspace/index'
+import { Select, Input, Icon, Tooltip, Alert, Slider, Switch, Pagination, Button, Checkbox, CheckboxGroup } from './workspace/index'
 import './App.scss'
 class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      checkVals: []
+      checkVals: ['1'],
+      checked: false,
+      value: '2'
     }
   }
-  onChange = (e) => {
-    console.log(e)
+  onPressEnter = (val) => {
+    console.log(val)
   }
-  handleGroupChange = (val) => {
+  onChange = (val) => {
     console.log(val)
     this.setState({
-      checkVals: ['1']
+      value: val
     })
   }
   render () {
-    const { checkVals } = this.state
+    const { checkVals, checked, value } = this.state
     return (
       <div className="App">
-        <CheckboxGroup value={checkVals} onChange={this.handleGroupChange}>
-          <Checkbox value="1" onChange={this.onChange}>复选框</Checkbox>
-          <Checkbox value="2" >复选框</Checkbox>
-        </CheckboxGroup>
-        {/* <Checkbox value="2" >复选框</Checkbox> */}
-        <input type="checkbox" />
+        <div style={{ width: '250px' }}>
+          <Input allowClear placeholder="请输入" />
+        </div>
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Icon from '../icon'
+import { classNames } from '.././../common/common'
 import "./index.scss"
 
 class Input extends React.PureComponent {
@@ -8,22 +9,14 @@ class Input extends React.PureComponent {
     super(props)
     this.inputRef = React.createRef()
     this.state = {
-      toggleShow: false
+      toggleShow: false,
+      value: ''
     }
   }
-  static propTypes = {
-    disabled: PropTypes.bool,
-    maxLength: PropTypes.number,
-    size: PropTypes.string,
-    value: PropTypes.string,
-    onChange: PropTypes.func,
-    allowClear: PropTypes.bool,
-    prefix: PropTypes.node,
-    placeholder: PropTypes.string,
-    type: PropTypes.string
-  }
-  static defaultProps = {
-    type: 'text'
+  componentDidMount () {
+    this.setState({
+      value: this.props.value
+    })
   }
   handleFocus = (e) => {
     const { onFocus } = this.props
@@ -34,7 +27,8 @@ class Input extends React.PureComponent {
     onBlur && onBlur(e)
   }
   renderInput () {
-    const { placeholder, value, maxLength, disabled, onChange, type, autoFocus } = this.props
+    const { placeholder, maxLength, disabled, onChange, type, autoFocus, onPressEnter } = this.props
+    const { value } = this.state
     return (
       <input
         ref={this.inputRef}
@@ -42,22 +36,32 @@ class Input extends React.PureComponent {
         className="ling-input"
         type={type}
         placeholder={placeholder}
-        onChange={(e) => {
-          onChange && onChange(e.target.value, e)
-        }}
-        onFocus={this.handleFocus}
-        onBlur={this.handleBlur}
         value={value}
         maxLength={maxLength}
         disabled={disabled}
+        onChange={(e) => {
+          this.setState({
+            value: e.target.value
+          })
+          onChange && onChange(e.target.value)
+        }}
+        onKeyUp={e => {
+          if (e.keyCode === 13) {
+            onPressEnter && onPressEnter(e.target.value)
+          }
+        }}
+        onFocus={this.handleFocus}
+        onBlur={this.handleBlur}
       />
     )
   }
   clearText = () => {
     const { onChange } = this.props
+    this.setState({
+      value: ''
+    })
     if (onChange) {
       onChange('')
-      this.inputRef.current.value = ''
     }
   }
   // 密码的现实和隐藏
@@ -78,36 +82,57 @@ class Input extends React.PureComponent {
     const {
       allowClear,
       prefix,
-      type
+      suffix,
+      type,
+      size
     } = this.props
-    const { toggleShow } = this.state
+    const { toggleShow, value } = this.state
     return (
-      <div className="ling-input-wrapper">
+      <label className={
+        classNames('ling-input-wrapper', size ? 'ling-input-' + size : '')}>
         {
-          prefix &&
-          <span className='ling-input-prefix'>
-            {prefix}
-          </span>
+          prefix
         }
         {this.renderInput()}
-        {/* {allowClear ? <Icon type='clear' /> : ''} */}
 
         { allowClear &&
           type !== 'password' &&
-          <span onClick={this.clearText} >
-            <Icon class='clear' />
-          </span>
+          value &&
+          <Icon class='clear' onClick={this.clearText} />
         }
         {
           type === 'password' &&
-          <span className="ling-input-suffix" onClick={this.toggleType}>
-            {toggleShow ? <Icon class='open-eye' /> : <Icon class='hide-eye' />}
+          <span className="ling-input-eyes" onClick={this.toggleType}>
+            {toggleShow ?
+              <Icon class='open-eye' />
+              :
+              <Icon class='hide-eye' />}
           </span>
         }
+        {
+          suffix
+        }
         <span className='ling-input-wrapper-mark'></span>
-      </div>
+      </label>
     )
   }
 }
 
+Input.propTypes = {
+  disabled: PropTypes.bool,
+  maxLength: PropTypes.number,
+  size: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  allowClear: PropTypes.bool,
+  prefix: PropTypes.node,
+  suffix: PropTypes.node,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  onPressEnter: PropTypes.func
+}
+Input.defaultProps = {
+  type: 'text',
+  value: ''
+}
 export default Input

@@ -8,17 +8,13 @@ import MessageObj from './messageObj.js'
 
 <Message />
 
-- message.success(content, [duration], onClose)
+- message.success(content, duration, onClose)
+- message.error(content, duration, onClose)
+- message.info(content, duration, onClose)
+- message.warning(content, duration, onClose)
+- message.loading(content, duration, onClose)
 
-- message.error(content, [duration], onClose)
-
-- message.info(content, [duration], onClose)
-
-- message.warning(content, [duration], onClose)
-
-- message.loading(content, [duration], onClose)
-
-```jsx
+```js
 import React from 'react';
 import { message, Button } from 'ling-ui'
 class App extends React.Component {
@@ -63,16 +59,12 @@ export default App;
 <MessageObj />
 
 - message.success(config)
-
 - message.error(config)
-
 - message.info(config)
-
 - message.warning(config)
-
 - message.loading(config)
 
-```jsx
+```js
 
 
 // 组件库参考文章  https://juejin.im/post/6844903749912100871#heading-6
