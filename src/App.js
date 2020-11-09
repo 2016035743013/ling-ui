@@ -2,7 +2,7 @@
 // 组件库参考文章  https://juejin.im/post/6844903749912100871#heading-6
 
 import React from 'react';
-import { Select, Input, Icon, Tooltip, Alert, Slider, Switch, Pagination, Button, Checkbox, CheckboxGroup } from './workspace/index'
+import { Select, Input, InputNumber, Tooltip, Alert, Slider, Switch, Pagination, Button, Checkbox, CheckboxGroup } from './workspace/index'
 import './App.scss'
 class App extends React.Component {
   constructor(props) {
@@ -27,7 +27,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <div style={{ width: '250px' }}>
-          <Input allowClear placeholder="请输入" />
+          {/* <Input allowClear placeholder="请输入" /> */}
+          <InputNumber max={10} min={1} value={2} step={0.2} />
         </div>
       </div>
     );
