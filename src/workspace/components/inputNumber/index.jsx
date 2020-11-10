@@ -16,6 +16,8 @@ export default class InputNumber extends React.Component {
     const { value, defaultValue } = this.props
     this.setState({
       inputNumber: value | defaultValue
+    }, () => {
+      this.handleBlur()
     })
   }
   // 输入框聚焦监听
@@ -24,8 +26,15 @@ export default class InputNumber extends React.Component {
     onFocus && onFocus(e)
   }
   // 输入框失焦监听
-  handleBlur = (e) => {
+  handleBlur = () => {
     let inputNumber = this.state.inputNumber
+    const { formatter } = this.props
+    if (formatter) {
+      this.setState({
+        inputNumber: formatter(inputNumber + '')
+      })
+      return
+    }
     if (this.isValid()) {
       inputNumber = Number(inputNumber);
 
@@ -76,7 +85,8 @@ export default class InputNumber extends React.Component {
       inputNumber = accAdd(step, inputNumber);
     }
 
-    this.setState({ inputNumber, inputActive }, this.onChange);
+    // this.setState({ inputNumber, inputActive }, this.onChange);
+    this.handleBlur()
   }
   // 按一定步数减少
   decrease = () => {
@@ -91,7 +101,8 @@ export default class InputNumber extends React.Component {
       inputNumber = accSub(inputNumber, step);
     }
 
-    this.setState({ inputNumber, inputActive }, this.onChange);
+    // this.setState({ inputNumber, inputActive }, this.onChange);
+    this.handleBlur()
   }
   // 
   isValid = () => {
