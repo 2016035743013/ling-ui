@@ -9,59 +9,81 @@ export default class InputNumber extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      inputNumber: ''
+      inputNumber: '',
+      formatNumber: ''
     };
   }
   componentDidMount () {
     const { value, defaultValue } = this.props
     this.setState({
       inputNumber: value | defaultValue
-    }, () => {
-      this.handleBlur()
     })
-  }
-  // 输入框聚焦监听
-  handleFocus = (e) => {
-    const { onFocus } = this.props
-    onFocus && onFocus(e)
   }
   // 输入框失焦监听
   handleBlur = () => {
-    let inputNumber = this.state.inputNumber
-    const { formatter } = this.props
-    if (formatter) {
-      this.setState({
-        inputNumber: formatter(inputNumber + '')
-      })
+    let inputNumber = this.state.inputNumber + ''
+    const value = inputNumber.match(/\d+/g)
+    let number = ''
+    const { formatter, onChange, min, max } = this.props
+    if (!value) {
       return
     }
-    if (this.isValid()) {
-      inputNumber = Number(inputNumber);
-
-      if (inputNumber > this.props.max) {
-        inputNumber = Number(this.props.max);
-      } else if (inputNumber < this.props.min) {
-        inputNumber = Number(this.props.min);
-      }
+    value.forEach(val => {
+      number += val
+    })
+    if (formatter) {
+      this.setState({
+        inputNumber: formatter(Number(number))
+      })
+      onChange && onChange(Number(number))
     } else {
-      inputNumber = '';
+      if (!isNaN(Number(number))) {
+        if (number > max) {
+          number = max
+        } else if (number < min) {
+          number = min
+        }
+        this.setState({
+          inputNumber: number
+        }, () => {
+          this.onChange()
+        })
+      } else {
+        this.setState({
+          inputNumber: ''
+        }, () => {
+          this.onChange()
+        })
+      }
     }
-    this.setState({ inputNumber }, this.onChange);
   }
-  // 
+  // 监听数值的改变
   onChange = () => {
     const { onChange } = this.props
     onChange && onChange(this.state.inputNumber)
   }
   // 监听文本输入
   onInput = (e) => {
-    this.setState({ inputNumber: e.target.value }, () => {
-      clearTimeout(this.timeout);
-
-      this.timeout = setTimeout(() => {
-        this.handleBlur();
-      }, 500);
-    });
+    const value = e.target.value.match(/\d+/g)
+    let number = ''
+    const { formatter, onChange } = this.props
+    if (!value) {
+      return
+    }
+    value.forEach(val => {
+      number += val
+    })
+    if (formatter) {
+      this.setState({
+        inputNumber: formatter(Number(number))
+      })
+      onChange && onChange(Number(number))
+    } else {
+      this.setState({
+        inputNumber: number
+      })
+      onChange && onChange(number)
+    }
   }
   // 回车监听函数
   handleKeyup = (e) => {
@@ -74,35 +96,37 @@ export default class InputNumber extends React.Component {
   // 按一定步数增加
   increase = () => {
     const { step, max, disabled, min } = this.props;
-    let { inputNumber, inputActive } = this.state;
+    let { inputNumber } = this.state;
 
-    if (this.maxDisabled) {
-      inputActive = false;
-    } else {
-      if (inputNumber + Number(step) > max || disabled) return;
-      if (inputNumber + Number(step) < min) inputNumber = min - Number(step);
+    if (inputNumber + Number(step) > max || disabled) return;
 
-      inputNumber = accAdd(step, inputNumber);
+    if (inputNumber + Number(step) < min) {
+      inputNumber = min - Number(step)
     }
 
-    // this.setState({ inputNumber, inputActive }, this.onChange);
-    this.handleBlur()
+    inputNumber = accAdd(step, inputNumber);
+    this.setState({
+      inputNumber
+    })
+    this.onChange()
   }
   // 按一定步数减少
   decrease = () => {
     const { step, min, disabled, max } = this.props;
-    let { inputNumber, inputActive } = this.state;
+    let { inputNumber } = this.state;
 
-    if (this.minDisabled) {
-      inputActive = false;
-    } else {
-      if (inputNumber - Number(step) < min || disabled) return;
-      if (inputNumber - Number(step) > max) inputNumber = Number(max) + Number(step);
-      inputNumber = accSub(inputNumber, step);
+    if (inputNumber - Number(step) < min || disabled)
+      return;
+
+    if (inputNumber - Number(step) > max) {
+      inputNumber = Number(max) + Number(step);
     }
 
-    // this.setState({ inputNumber, inputActive }, this.onChange);
-    this.handleBlur()
+    inputNumber = accSub(inputNumber, step);
+    this.setState({
+      inputNumber
+    })
+    this.onChange()
   }
   // 
   isValid = () => {
@@ -127,7 +151,6 @@ export default class InputNumber extends React.Component {
         type='text'
         placeholder={placeholder}
         onChange={this.onInput}
-        onFocus={this.handleFocus}
         onBlur={this.handleBlur}
         onKeyUp={this.handleKeyup}
         value={inputNumber}
