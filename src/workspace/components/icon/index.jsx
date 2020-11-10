@@ -1,5 +1,6 @@
 import React from 'react'
 import { classNames } from '../../common/common'
+import PropTypes from 'prop-types'
 import './index.scss'
 export default class Icon extends React.Component {
   constructor(props) {
@@ -38,4 +39,9 @@ export default class Icon extends React.Component {
       <i style={style} className={classNames('iconfont', typeMap[type])} onClick={this.handleClick}></i>
     )
   }
+}
+
+Icon.propTypes = {
+  class: PropTypes.string,
+  style: PropTypes.object
 }
