@@ -20,10 +20,10 @@ class App extends React.Component {
       <div className="App">
         <div style={{ width: '250px' }}>
           {/* <Input allowClear placeholder="请输入" /> */}
-          <InputNumber max={10} min={1} value={2} step={0.2}
-            // formatter={value =>
-            //   `${value}%`
-            // }
+          <InputNumber max={100} min={1} value={2} step={0.02}
+            formatter={value =>
+              `${value}%`
+            }
             onChange={this.onChange}
           />
         </div>
