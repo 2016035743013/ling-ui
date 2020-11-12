@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "ling-ui": "^0.1.21",
+    "ling-ui": "^0.1.22",
     "moment": "^2.29.1"
   },
   "scripts": {

@@ -35,6 +35,7 @@ export default class InputNumber extends React.Component {
       return preVal + curVal
     })
   }
+  // 设置输入框的数字
   setNumber = () => {
     const { max, min, formatter } = this.props
     const { onChange, precision } = this.state
@@ -47,7 +48,6 @@ export default class InputNumber extends React.Component {
       })
       return
     }
-    console.log(number)
     number = (Math.floor(Number(number) * Math.pow(10, precision)) / Math.pow(10, precision)).toFixed(precision)
 
     if (number >= max) {

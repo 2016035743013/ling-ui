@@ -18,9 +18,10 @@ export default class Pagination extends React.Component {
     this.setState({
       current: this.props.defaultCurrent
     }, () => {
-      this.initPageItems()
+      this.updatePages()
     })
   }
+  // 向左翻页
   turnLeft = () => {
     const { current } = this.state
     const { disabled } = this.props
@@ -29,6 +30,7 @@ export default class Pagination extends React.Component {
     }
     this.turnToPage(current - 1)
   }
+  // 向右翻页
   turnRight = () => {
     const { current, pages } = this.state
     const { disabled } = this.props
@@ -37,13 +39,14 @@ export default class Pagination extends React.Component {
     }
     this.turnToPage(current + 1)
   }
+  // 直接跳转页码
   turnToPage = (num) => {
     const { disabled } = this.props
     if (disabled) return
     this.setState({
       current: num
     }, () => {
-      this.initPageItems()
+      this.updatePages()
     })
   }
   // 翻5页
@@ -57,7 +60,8 @@ export default class Pagination extends React.Component {
     }
     this.turnToPage(currentPage)
   }
-  initPageItems = () => {
+  // 更新分页器
+  updatePages = () => {
     const { current } = this.state
     const { total, pageSize, onChange } = this.props
     let itemCount = Math.ceil(total / pageSize)
@@ -93,7 +97,6 @@ export default class Pagination extends React.Component {
     const { disabled } = this.props
     return (
       <div className='ling-pagination-wrapper'>
-        {/* className={['ling-pagination-left', current <= 1 || disabled ? 'link-pagination-disabled' : ''].join(' ').trim()} */}
         <span
           className={classNames({
             'ling-pagination-left': true,
@@ -106,7 +109,13 @@ export default class Pagination extends React.Component {
         {
           pages > 7 &&
           <span
-            className={['ling-pagination-page-item', current === 1 ? 'ling-pagination-active' : '', disabled ? 'link-pagination-disabled' : ''].join(' ').trim()}
+            className={classNames(
+              'ling-pagination-page-item',
+              {
+                'ling-pagination-active': current === 1,
+                'link-pagination-disabled': disabled
+              },
+            )}
             onClick={() => { this.turnToPage(1) }}
           >
             1
@@ -117,7 +126,12 @@ export default class Pagination extends React.Component {
 
           isShowLeft &&
           <span
-            className={["ling-pagination-more", disabled ? 'link-pagination-more-disabled' : ''].join(' ').trim()}
+            className={classNames(
+              "ling-pagination-more",
+              {
+                'link-pagination-more-disabled': disabled
+              }
+            )}
             onClick={() => { this.trun5Page(-5) }}
           >
             <Icon class='more' />
@@ -130,7 +144,15 @@ export default class Pagination extends React.Component {
           middleCounts.map((item, index) => {
             return (
               <span
-                className={['ling-pagination-page-item', current === item ? 'ling-pagination-active' : '', disabled ? 'link-pagination-disabled' : ''].join(' ').trim()} key={index}
+                className={
+                  classNames(
+                    'ling-pagination-page-item',
+                    {
+                      'ling-pagination-active': current === item,
+                      'link-pagination-disabled': disabled
+                    }
+                  )
+                }
                 onClick={() => { this.turnToPage(item) }}
               >{item}</span>
             )
@@ -142,7 +164,14 @@ export default class Pagination extends React.Component {
 
           isShowRight &&
           <span
-            className={["ling-pagination-more", disabled ? 'link-pagination-more-disabled' : ''].join(' ').trim()}
+            className={
+              classNames(
+                "ling-pagination-more",
+                {
+                  'link-pagination-more-disabled': disabled
+                }
+              )
+            }
             onClick={() => { this.trun5Page(5) }}
           >
             <Icon class='more' />
@@ -152,13 +181,29 @@ export default class Pagination extends React.Component {
         {
           pages > 7 &&
           <span
-            className={['ling-pagination-page-item', current === pages ? 'ling-pagination-active' : '', disabled ? 'link-pagination-disabled' : ''].join(' ').trim()} onClick={() => { this.turnToPage(pages) }}
+            onClick={() => { this.turnToPage(pages) }}
+            className={
+              classNames(
+                'ling-pagination-page-item',
+                {
+                  'ling-pagination-active': current === pages,
+                  'link-pagination-disabled': disabled
+                }
+              )
+            }
           >
             {pages}
           </span>
         }
         <span
-          className={['ling-pagination-right', current >= pages || disabled ? 'link-pagination-disabled' : ''].join(' ').trim()}
+          className={
+            classNames(
+              'ling-pagination-right',
+              {
+                'link-pagination-disabled': current >= pages || disabled
+              }
+            )
+          }
           onClick={this.turnRight}
         >
           <Icon class="right" />
@@ -180,5 +225,6 @@ Pagination.propTypes = {
 
 Pagination.defaultProps = {
   pageSize: 10,
-  defaultCurrent: 1
+  defaultCurrent: 1,
+  total: 10
 }
