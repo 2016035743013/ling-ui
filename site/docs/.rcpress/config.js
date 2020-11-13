@@ -30,7 +30,8 @@ module.exports = {
         ['icon', 'Icon 图标'],
         ['button', 'Button 按钮'],
         ['input', 'Input 输入框'],
-        ['message', 'Message 消息提示']
+        ['message', 'Message 消息提示'],
+        ['inputNumber', 'InputNumber数字输入框'],
       ]
     },
     // 是否启用回到顶部按钮

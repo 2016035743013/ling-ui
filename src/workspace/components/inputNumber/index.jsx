@@ -9,7 +9,9 @@ export default class InputNumber extends React.Component {
     super(props)
     this.state = {
       inputNumber: '',
-      precision: 0 // 精度
+      precision: 0, // 精度
+      maxDisabled: false,
+      minDisabled: false
     };
   }
   componentDidMount () {
@@ -17,7 +19,7 @@ export default class InputNumber extends React.Component {
 
     this.setState({
       inputNumber: value || defaultValue,
-      precision: (step + '').split('.')[1] && (step + '').split('.')[1].length
+      precision: ((step + '').split('.')[1] && (step + '').split('.')[1].length) || 0
     }, () => {
       this.setNumber()
     })
@@ -33,9 +35,12 @@ export default class InputNumber extends React.Component {
       return preVal + curVal
     })
   }
+  // 设置输入框的数字
   setNumber = () => {
     const { max, min, formatter } = this.props
     const { onChange, precision } = this.state
+    let maxDisabled = false
+    let minDisabled = false
     let number = this.getNumber()
     if (!number) {
       this.setState({
@@ -43,16 +48,19 @@ export default class InputNumber extends React.Component {
       })
       return
     }
-    console.log(number)
     number = (Math.floor(Number(number) * Math.pow(10, precision)) / Math.pow(10, precision)).toFixed(precision)
 
-    if (number > max) {
+    if (number >= max) {
       number = max
-    } else if (number < min) {
+      maxDisabled = true
+    } else if (number <= min) {
       number = min
+      minDisabled = true
     }
     this.setState({
-      inputNumber: formatter(number)
+      inputNumber: formatter(number),
+      maxDisabled,
+      minDisabled
     }, () => {
       onChange && onChange(number)
     })
@@ -71,15 +79,12 @@ export default class InputNumber extends React.Component {
   // 监听文本输入
   onInput = (e) => {
     console.log('input输入')
-    const { formatter } = this.props
+    const { onChange } = this.props
+    const value = e.target.value
     this.setState({
-      inputNumber: e.target.value
-    }, () => {
-      this.setState({
-        inputNumber: formatter(this.getNumber())
-      })
-
+      inputNumber: value
     })
+    onChange && onChange(value)
   }
   // 回车监听函数
   handleKeyup = (e) => {
@@ -129,18 +134,6 @@ export default class InputNumber extends React.Component {
       })
     }
   }
-  // 
-  isValid = () => {
-    return this.state.inputNumber !== '' && !isNaN(Number(this.state.inputNumber));
-  }
-  // 是否禁用 减
-  get minDisabled () {
-    return !this.isValid || (this.state.inputNumber - Number(this.props.step) < this.props.min);
-  }
-  // 是否禁用 加
-  get maxDisabled () {
-    return !this.isValid || (this.state.inputNumber + Number(this.props.step) > this.props.max);
-  }
   renderInput () {
     const { placeholder, maxLength, disabled, autoFocus } = this.props
     const { inputNumber } = this.state
@@ -161,32 +154,31 @@ export default class InputNumber extends React.Component {
     )
   }
   render () {
+    const { maxDisabled, minDisabled } = this.state
     return (
-      <div className='ling-inputnumber-wrapper'>
+      <label className='ling-inputnumber-wrapper'>
         {this.renderInput()}
         <span className='ling-input-wrapper-mark'></span>
         <div className="ling-number-control">
-          <span onClick={this.increase} className={this.maxDisabled ? "ling-control-disabled" : ''}>
+          <span onClick={this.increase} className={maxDisabled ? "ling-control-disabled" : ''}>
             <Icon class='up' />
           </span>
-          <span onClick={this.decrease} className={this.minDisabled ? "ling-control-disabled" : ''}>
+          <span onClick={this.decrease} className={minDisabled ? "ling-control-disabled" : ''}>
             <Icon class='down' />
           </span>
         </div>
-      </div>
+      </label>
     )
   }
 }
 
 InputNumber.propTypes = {
   step: PropTypes.number,
-  controls: PropTypes.bool,
   max: PropTypes.number,
   min: PropTypes.number,
   value: PropTypes.number,
   onChange: PropTypes.func,
   defaultValue: PropTypes.number,
-  onFocus: PropTypes.func,
   disabled: PropTypes.bool,
   autoFocus: PropTypes.bool,
   onPressEnter: PropTypes.func,
@@ -195,7 +187,6 @@ InputNumber.propTypes = {
 
 InputNumber.defaultProps = {
   step: 1,
-  controls: true,
   max: Number.MAX_SAFE_INTEGER,
   min: Number.MIN_SAFE_INTEGER,
   formatter: (val) => { return val }

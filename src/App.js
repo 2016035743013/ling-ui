@@ -7,22 +7,21 @@ import './App.scss'
 class App extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      value: 'input'
+    }
   }
   onChange = (val) => {
-    console.log(val)
+    this.setState({
+      value: '修改了？'
+    })
   }
   render () {
+    const { value } = this.state
     return (
-      <div className="App">
-        <div style={{ width: '250px' }}>
-          {/* <Input allowClear placeholder="请输入" /> */}
-          <InputNumber max={100} min={1} value={2} step={0.02}
-            formatter={value =>
-              `${value}%`
-            }
-            onChange={this.onChange}
-          />
-        </div>
+      <div className="App" onClick={this.onChange}>
+        <Pagination total={100} pageSize={10} />
+        <Input value={value} />
       </div>
     );
   }
