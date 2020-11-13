@@ -13,10 +13,6 @@ class App extends React.Component {
   }
   render () {
     return (
-      //       $dangerColor: #ff4d4f;
-      // $successColor: #67c23a;
-      // $infoColor: #909399;
-      // $warningColor: rgb(250, 173, 20);
       <div className="App">
         <div style={{ width: '250px' }}>
           {/* <Input allowClear placeholder="请输入" /> */}
